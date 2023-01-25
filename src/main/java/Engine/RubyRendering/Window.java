@@ -1,10 +1,12 @@
-package Ruby;
+package Engine.RubyRendering;
 
+import Engine.MoonstoneMaths.Vector3f;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFW;
+import static  org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
+import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.system.MemoryUtil;
 
 public class Window {
@@ -14,9 +16,11 @@ public class Window {
 
     private static Window window = null;
 
+    private Mesh m;
+
     private Window(){
-        this.width = 1920;
-        this.height = 1080;
+        this.width = 1280;
+        this.height = 720;
         this.title = "WindowName";
     }
 
@@ -42,6 +46,13 @@ public class Window {
         GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE,GLFW.GLFW_FALSE);
         GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE,GLFW.GLFW_TRUE);
         GLFW.glfwWindowHint(GLFW.GLFW_MAXIMIZED,GLFW.GLFW_TRUE);
+        GLFW.glfwDefaultWindowHints();
+        GLFW.glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        GLFW.glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+
+        // OpenGL Window Hints
+        //glfwWindowHint(GLFW_OPENGL_PROFILE,GLFW_OPENGL_CORE_PROFILE);
+        //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT,GLFW_TRUE);
 
         //Create Window
         GLFWWindow = GLFW.glfwCreateWindow(this.width,this.height,this.title, MemoryUtil.NULL,MemoryUtil.NULL);
@@ -59,17 +70,41 @@ public class Window {
 
         //LWJGL -> Binding To OPENGL & GLFW
         GL.createCapabilities();
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0,1, 0, 1, -1, 1);
+        glMatrixMode(GL_MODELVIEW);
+        glDisable(GL_DEPTH_TEST);
+
+        //Create Mesh
+        m = new Mesh(new Vertex[] {
+                new Vertex(new Vector3f(-0.5f,0.5f,0.0f)),
+                new Vertex(new Vector3f(0.5f,0.5f,0.0f)),
+                new Vertex(new Vector3f(-0.5f,-0.5f,0.0f)),
+                new Vertex(new Vector3f(0.5f,-0.5f,0.0f))
+        }, new int[]{
+                0, 1, 2,
+                0, 3, 2,
+        });
+
+        m.Create();
     }
 
-    private void loop(){
-        while (!GLFW.glfwWindowShouldClose(GLFWWindow)){
+    private void loop() {
+        glClearColor(0.f, 1.f, 1.f, 1.f);
+
+        while (!GLFW.glfwWindowShouldClose(GLFWWindow)) {
             //Get Events
             GLFW.glfwPollEvents();
 
             //Clear
-            GL11.glClearColor(0.f,1.f,1.f,1.f);
-            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glPushMatrix();
 
+            //Render Objects
+            m.Draw();
+
+            glPopMatrix();
             GLFW.glfwSwapBuffers(GLFWWindow);
         }
         GLFW.glfwDestroyWindow(GLFWWindow);

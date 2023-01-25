@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Winter2023GameJam_jar</output-path>
     <root id="archive" name="Winter2023GameJam.jar">
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/Game/META-INF/MANIFEST.MF" />
       </element>
       <element id="module-output" name="Winter2023GameJam.main" />
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.8.1/e6c63bf990dc88a6527b4ed617b23e47048f07e0/junit-platform-engine-1.8.1.jar" path-in-jar="/" />
