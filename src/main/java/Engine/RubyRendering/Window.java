@@ -13,6 +13,7 @@ public class Window {
     private int width, height;
     private String title;
     private long GLFWWindow;
+    private static long time;
 
     private static Window window = null;
 
@@ -37,6 +38,9 @@ public class Window {
     }
 
     private void init(){
+        //Set FPS
+        time = System.currentTimeMillis();
+
         //Debug Logs
         GLFWErrorCallback.createPrint(System.err).set();
         if(!GLFW.glfwInit()) throw new IllegalStateException("Unable to init GLFW");
@@ -90,6 +94,15 @@ public class Window {
         m.Create();
     }
 
+    private void FPSCalc(){
+        float TimeBetween = System.currentTimeMillis() - time;
+
+        int FPS = (int)(1000/TimeBetween);
+        GLFW.glfwSetWindowTitle(GLFWWindow,title + " | FPS: " + FPS);
+
+        time = System.currentTimeMillis();
+    }
+
     private void loop() {
         glClearColor(0.f, 1.f, 1.f, 1.f);
 
@@ -106,6 +119,9 @@ public class Window {
 
             glPopMatrix();
             GLFW.glfwSwapBuffers(GLFWWindow);
+
+            //FPS
+            FPSCalc();
         }
         GLFW.glfwDestroyWindow(GLFWWindow);
     }
