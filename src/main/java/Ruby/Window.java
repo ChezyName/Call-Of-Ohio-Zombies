@@ -72,5 +72,6 @@ public class Window {
 
             GLFW.glfwSwapBuffers(GLFWWindow);
         }
+        GLFW.glfwDestroyWindow(GLFWWindow);
     }
 }
