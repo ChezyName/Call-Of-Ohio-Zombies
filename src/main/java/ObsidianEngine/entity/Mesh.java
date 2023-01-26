@@ -1,5 +1,7 @@
-package Engine.RubyRendering;
+package ObsidianEngine.entity;
 
+import ObsidianEngine.render.Shader;
+import org.joml.Vector3f;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
@@ -8,18 +10,21 @@ import java.nio.IntBuffer;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL30.*;
+
 public class Mesh {
-    private Vertex[] vertices;
+    private Vector3f[] vertices;
     private int[] indices;
+    private Shader shader;
 
     private int vao,pbo,ibo;
 
-    public Mesh(Vertex[] vertices, int[] indices){
+    public Mesh(Vector3f[] vertices, int[] indices, Shader shader){
         this.vertices = vertices;
         this.indices = indices;
+        this.shader = shader;
     }
 
-    public Vertex[] getVertices() {
+    public Vector3f[] getVertices() {
         return vertices;
     }
 
@@ -48,7 +53,11 @@ public class Mesh {
         glBindVertexArray(vao);
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+
+        shader.bind();
         glDrawElements(GL_TRIANGLES, indices.length, GL_UNSIGNED_INT, 0);
+        shader.unbind();
+
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glDisableVertexAttribArray(0);
         glBindVertexArray(0);
@@ -61,9 +70,9 @@ public class Mesh {
         FloatBuffer positionBuffer = MemoryUtil.memAllocFloat(vertices.length * 3);
         float[] positionData = new float[vertices.length * 3];
         for (int i = 0; i < vertices.length; i++) {
-            positionData[i * 3] = vertices[i].getPosition().getX();
-            positionData[i * 3 + 1] = vertices[i].getPosition().getY();
-            positionData[i * 3 + 2] = vertices[i].getPosition().getZ();
+            positionData[i * 3] = vertices[i].x();
+            positionData[i * 3 + 1] = vertices[i].y();
+            positionData[i * 3 + 2] = vertices[i].z();
         }
         positionBuffer.put(positionData).flip();
 

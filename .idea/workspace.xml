@@ -10,8 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b516d30-da46-4da6-a7bf-c00ec8a86d27" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Box.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Input.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/render/Camera.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/RubyRendering/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/RubyRendering/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid12224.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/MoonstoneMaths/Vector3f.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/RubyRendering/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Mesh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/RubyRendering/Vertex.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/RubyRendering/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +45,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2Knhj9fNJK52Dav7lUou7wsm7DD" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -49,18 +59,27 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/mineb/IdeaProjects/Winter2023GameJam/src/main/java/Game",
+    "last_opened_file_path": "C:/Users/mineb/IdeaProjects/Winter2023GameJam/resources/shaders",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\resources\shaders" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main" />
+      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam" />
+      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\java\ObsidianEngine\Utils" />
+      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
@@ -106,7 +125,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1674616388814</updated>
-      <workItem from="1674616389695" duration="15368000" />
+      <workItem from="1674616389695" duration="27907000" />
     </task>
     <servers />
   </component>

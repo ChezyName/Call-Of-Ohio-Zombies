@@ -1,6 +1,6 @@
 package Game;
 
-import Engine.RubyRendering.Window;
+import ObsidianEngine.io.Window;
 
 public class Main {
     public static void main(String[] args) {

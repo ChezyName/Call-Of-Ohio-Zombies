@@ -1,6 +1,9 @@
-package Engine.RubyRendering;
+package ObsidianEngine.io;
 
-import Engine.MoonstoneMaths.Vector3f;
+import ObsidianEngine.entity.Box;
+import ObsidianEngine.entity.Mesh;
+import ObsidianEngine.render.Shader;
+import org.joml.Vector3f;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFW;
 import static  org.lwjgl.glfw.GLFW.*;
@@ -14,6 +17,7 @@ public class Window {
     private String title;
     private long GLFWWindow;
     private static long time;
+    private Input inputsystem;
 
     private static Window window = null;
 
@@ -38,8 +42,9 @@ public class Window {
     }
 
     private void init(){
-        //Set FPS
+        //Core Systems
         time = System.currentTimeMillis();
+        inputsystem = new Input();
 
         //Debug Logs
         GLFWErrorCallback.createPrint(System.err).set();
@@ -80,17 +85,13 @@ public class Window {
         glMatrixMode(GL_MODELVIEW);
         glDisable(GL_DEPTH_TEST);
 
-        //Create Mesh
-        m = new Mesh(new Vertex[] {
-                new Vertex(new Vector3f(-0.5f,0.5f,0.0f)),
-                new Vertex(new Vector3f(0.5f,0.5f,0.0f)),
-                new Vertex(new Vector3f(-0.5f,-0.5f,0.0f)),
-                new Vertex(new Vector3f(0.5f,-0.5f,0.0f))
-        }, new int[]{
-                0, 1, 2,
-                0, 3, 2,
-        });
+        //Post OpenGL Init
+        //Init Default Shader
+        Shader.defaultShader = new Shader("/shaders/mainVertex.glsl","/shaders/mainFragment.glsl");
+        Shader.defaultShader.create();
 
+        //Create Mesh
+        m = new Box(1,1,1,new Vector3f(0,0,0));
         m.Create();
     }
 
