@@ -5,6 +5,7 @@ import ObsidianEngine.entity.Mesh;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
 import org.joml.Vector3f;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFW;
 import static  org.lwjgl.glfw.GLFW.*;
@@ -12,6 +13,8 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.system.MemoryUtil;
+
+import java.nio.DoubleBuffer;
 
 public class Window {
     private int width, height;
@@ -47,7 +50,7 @@ public class Window {
         //Core Systems
         time = System.currentTimeMillis();
         inputsystem = new Input();
-        cam = new Camera(0,0,0);
+        cam = new Camera(0,0,100);
 
         //Debug Logs
         GLFWErrorCallback.createPrint(System.err).set();
@@ -87,6 +90,9 @@ public class Window {
         glMatrixMode(GL_MODELVIEW);
         glDisable(GL_DEPTH_TEST);
 
+        //Aspect Ratio 16:9
+        glfwSetWindowAspectRatio(GLFWWindow,16,9);
+
         //Post OpenGL Init
         //Init Default Shader
         Shader.defaultShader = new Shader("/shaders/mainVertex.glsl","/shaders/mainFragment.glsl");
@@ -108,17 +114,35 @@ public class Window {
 
     private void loop() {
         glClearColor(0.f, 1.f, 1.f, 1.f);
+        //Locks Mouse To Screen / Hids Mosue
+        glfwSetInputMode(GLFWWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
         while (!GLFW.glfwWindowShouldClose(GLFWWindow)) {
             //Get Events
             GLFW.glfwPollEvents();
 
-            if(glfwGetKey(GLFWWindow,GLFW_KEY_W) == GLFW_TRUE) cam.translate(0,1,0);
-            if(glfwGetKey(GLFWWindow,GLFW_KEY_S) == GLFW_TRUE) cam.translate(0,-1,0);
+            if(glfwGetKey(GLFWWindow,GLFW_KEY_W) == GLFW_TRUE) cam.translate(0,0,-1);
+            if(glfwGetKey(GLFWWindow,GLFW_KEY_S) == GLFW_TRUE) cam.translate(0,0,1);
             if(glfwGetKey(GLFWWindow,GLFW_KEY_A) == GLFW_TRUE) cam.translate(-1,0,0);
             if(glfwGetKey(GLFWWindow,GLFW_KEY_D) == GLFW_TRUE) cam.translate(1,0,0);
-            if(glfwGetMouseButton(GLFWWindow,GLFW_MOUSE_BUTTON_1) == GLFW_TRUE) cam.translate(0,0,50);
-            if(glfwGetMouseButton(GLFWWindow,GLFW_MOUSE_BUTTON_2) == GLFW_TRUE) cam.translate(0,0,-50);
+            if(glfwGetKey(GLFWWindow,GLFW_KEY_E) == GLFW_TRUE) cam.translate(0,1,0);
+            if(glfwGetKey(GLFWWindow,GLFW_KEY_Q) == GLFW_TRUE) cam.translate(0,-1,0);
+
+            //Mouse Positions
+            DoubleBuffer mouseX = BufferUtils.createDoubleBuffer(1);
+            DoubleBuffer mouseY = BufferUtils.createDoubleBuffer(1);
+            int newMouseX = -1;
+            int newMouseY = -1;
+
+            glfwGetCursorPos(GLFWWindow, mouseX, mouseY);
+            glfwSetInputMode(GLFWWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+
+            mouseX.rewind();
+            mouseY.rewind();
+            newMouseX = (int) mouseX.get(0);
+            newMouseY = (int) mouseY.get(0);
+
+            cam.setLookDir((float) newMouseX,(float) newMouseY);
 
             //Clear
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

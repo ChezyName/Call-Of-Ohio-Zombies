@@ -16,9 +16,17 @@ public class Box extends Mesh {
                 new Vector3f(50f,50f,0.0f),
                 new Vector3f(-50f,-50f,0.0f),
                 new Vector3f(50f,-50f,0.0f),
+
+                new Vector3f(-50f,50f,50.0f),
+                new Vector3f(50f,50f,50.0f),
+                new Vector3f(-50f,50f,-50.0f),
+                new Vector3f(50f,50f,-50.0f),
         }, new int[]{
                 0,1,2,
-                0,2,3
+                1,2,3,
+
+                4,5,6,
+                5,6,7
         }, Shader.defaultShader);
     }
 }

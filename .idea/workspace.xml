@@ -14,7 +14,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Box.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/render/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/render/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/shaders/mainVertex.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shaders/mainVertex.glsl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +119,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1674616388814</updated>
-      <workItem from="1674616389695" duration="34977000" />
+      <workItem from="1674616389695" duration="37541000" />
     </task>
     <servers />
   </component>
