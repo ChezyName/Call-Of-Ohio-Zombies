@@ -9,5 +9,6 @@ uniform mat4 uView;
 
 void main() {
     gl_Position = uProj * uView * vec4(position, 1.0);
-    color = vec3(position.x, position.y - position.x, position.y);
+    //color = vec3(position.x, position.y - position.x, position.y);
+    color = vec3(255,0,0);
 }

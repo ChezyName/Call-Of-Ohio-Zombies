@@ -113,6 +113,13 @@ public class Window {
             //Get Events
             GLFW.glfwPollEvents();
 
+            if(glfwGetKey(GLFWWindow,GLFW_KEY_W) == GLFW_TRUE) cam.translate(0,1,0);
+            if(glfwGetKey(GLFWWindow,GLFW_KEY_S) == GLFW_TRUE) cam.translate(0,-1,0);
+            if(glfwGetKey(GLFWWindow,GLFW_KEY_A) == GLFW_TRUE) cam.translate(-1,0,0);
+            if(glfwGetKey(GLFWWindow,GLFW_KEY_D) == GLFW_TRUE) cam.translate(1,0,0);
+            if(glfwGetMouseButton(GLFWWindow,GLFW_MOUSE_BUTTON_1) == GLFW_TRUE) cam.translate(0,0,50);
+            if(glfwGetMouseButton(GLFWWindow,GLFW_MOUSE_BUTTON_2) == GLFW_TRUE) cam.translate(0,0,-50);
+
             //Clear
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glPushMatrix();
@@ -126,6 +133,9 @@ public class Window {
             //FPS
             FPSCalc();
         }
+
+        //Cleanup
+        inputsystem.destroy();
         GLFW.glfwDestroyWindow(GLFWWindow);
     }
 }
