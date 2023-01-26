@@ -14,35 +14,35 @@ public class Box extends Mesh {
             LEFT FACE
          */
         super(new Vector3f[] {
-                new Vector3f(-50f,50f,-50.0f),
-                new Vector3f(50f,50f,-50.0f),
-                new Vector3f(-50f,-50f,-50.0f),
-                new Vector3f(50f,-50f,-50.0f),
+                new Vector3f(position.x + (width/2),position.y + (height/2),position.z + -(depth/2)),
+                new Vector3f(position.x - (width/2),position.y + (height/2),position.z + -(depth/2)),
+                new Vector3f(position.x + (width/2),position.y - (height/2),position.z + -(depth/2)),
+                new Vector3f(position.x - (width/2),position.y - (height/2),position.z + -(depth/2)),
 
-                new Vector3f(-50f,50f,50.0f),
-                new Vector3f(50f,50f,50.0f),
-                new Vector3f(-50f,50f,-50.0f),
-                new Vector3f(50f,50f,-50.0f),
+                new Vector3f(position.x + (width/2),position.y + (height/2),position.z + -(depth/2)),
+                new Vector3f(position.x - (width/2),position.y + (height/2),position.z + -(depth/2)),
+                new Vector3f(position.x + (width/2),position.y + (height/2),position.z - -(depth/2)),
+                new Vector3f(position.x - (width/2),position.y + (height/2),position.z - -(depth/2)),
 
-                new Vector3f(-50f,50f,50.0f),
-                new Vector3f(50f,50f,50.0f),
-                new Vector3f(-50f,-50f,50.0f),
-                new Vector3f(50f,-50f,50.0f),
+                new Vector3f(position.x + (width/2),position.y + (height/2),position.z - -(depth/2)),
+                new Vector3f(position.x - (width/2),position.y + (height/2),position.z - -(depth/2)),
+                new Vector3f(position.x + (width/2),position.y - (height/2),position.z - -(depth/2)),
+                new Vector3f(position.x - (width/2),position.y - (height/2),position.z - -(depth/2)),
 
-                new Vector3f(-50f,-50f,50.0f),
-                new Vector3f(50f,-50f,50.0f),
-                new Vector3f(-50f,-50f,-50.0f),
-                new Vector3f(50f,-50f,-50.0f),
+                new Vector3f(position.x + (width/2),position.y - (height/2),position.z + -(depth/2)),
+                new Vector3f(position.x - (width/2),position.y - (height/2),position.z + -(depth/2)),
+                new Vector3f(position.x + (width/2),position.y - (height/2),position.z - -(depth/2)),
+                new Vector3f(position.x - (width/2),position.y - (height/2),position.z - -(depth/2)),
 
-                new Vector3f(-50f,50f,50.0f),
-                new Vector3f(-50f,50f,-50.0f),
-                new Vector3f(-50f,-50f,-50.0f),
-                new Vector3f(-50f,-50f,50.0f),
+                new Vector3f(position.x + (width/2),position.y + (height/2),position.z + -(depth/2)),
+                new Vector3f(position.x + (width/2),position.y - (height/2),position.z + -(depth/2)),
+                new Vector3f(position.x + (width/2),position.y + (height/2),position.z - -(depth/2)),
+                new Vector3f(position.x + (width/2),position.y - (height/2),position.z - -(depth/2)),
 
-                new Vector3f(50f,50f,50.0f),
-                new Vector3f(50f,50f,-50.0f),
-                new Vector3f(50f,-50f,-50.0f),
-                new Vector3f(50f,-50f,50.0f),
+                new Vector3f(position.x - (width/2),position.y + (height/2),position.z + -(depth/2)),
+                new Vector3f(position.x - (width/2),position.y - (height/2),position.z + -(depth/2)),
+                new Vector3f(position.x - (width/2),position.y + (height/2),position.z - -(depth/2)),
+                new Vector3f(position.x - (width/2),position.y - (height/2),position.z - -(depth/2)),
         }, new int[]{
                 0,1,2,
                 1,2,3,
@@ -61,10 +61,6 @@ public class Box extends Mesh {
 
                 20,21,22,
                 21,22,23
-
-
-
-
         }, Shader.defaultShader);
     }
 }

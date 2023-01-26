@@ -99,7 +99,7 @@ public class Window {
         Shader.defaultShader.create();
 
         //Create Mesh
-        m = new Box(1,1,1,new Vector3f(0,0,0));
+        m = new Box(25,25,25,new Vector3f(0,0,0));
         m.Create();
     }
 
