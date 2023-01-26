@@ -2,6 +2,7 @@ package ObsidianEngine.io;
 
 import ObsidianEngine.entity.Box;
 import ObsidianEngine.entity.Mesh;
+import ObsidianEngine.entity.Plane;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
 import org.joml.Vector3f;
@@ -15,6 +16,7 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.DoubleBuffer;
+import java.util.ArrayList;
 
 public class Window {
     private int width, height;
@@ -26,7 +28,7 @@ public class Window {
     private static Window window = null;
     private Camera cam;
 
-    private Mesh m;
+    private final ArrayList<Mesh> Entities = new ArrayList<Mesh>();
 
     private Window(){
         this.width = 1280;
@@ -88,7 +90,7 @@ public class Window {
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         glMatrixMode(GL_MODELVIEW);
-        glDisable(GL_DEPTH_TEST);
+        glEnable(GL_DEPTH_TEST);
 
         //Aspect Ratio 16:9
         glfwSetWindowAspectRatio(GLFWWindow,16,9);
@@ -98,9 +100,19 @@ public class Window {
         Shader.defaultShader = new Shader("/shaders/mainVertex.glsl","/shaders/mainFragment.glsl");
         Shader.defaultShader.create();
 
+        //Create Ground Plane
+        Mesh plane = new Plane(10000,10000,new Vector3f(0,0,0));
+        plane.Create();
+        Entities.add(plane);
+
         //Create Mesh
-        m = new Box(25,25,25,new Vector3f(0,0,0));
+        Mesh m = new Box(30,30,30,new Vector3f(0,15,0),new Vector3f(255,255,0));
         m.Create();
+        Entities.add(m);
+
+        m = new Box(30,30,30,new Vector3f(18,25,15f),new Vector3f(255,125f,0));
+        m.Create();
+        Entities.add(m);
     }
 
     private void FPSCalc(){
@@ -112,8 +124,14 @@ public class Window {
         time = System.currentTimeMillis();
     }
 
+    private void RenderMeshes(){
+        for(Mesh m : Entities){
+            m.Draw(cam);
+        }
+    }
+
     private void loop() {
-        glClearColor(0.f, 1.f, 1.f, 1.f);
+        glClearColor(0.f, 0.0f, 0.0f, 1.f);
         //Locks Mouse To Screen / Hids Mosue
         glfwSetInputMode(GLFWWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
@@ -149,7 +167,7 @@ public class Window {
             glPushMatrix();
 
             //Render Objects
-            m.Draw(cam);
+            RenderMeshes();
 
             glPopMatrix();
             GLFW.glfwSwapBuffers(GLFWWindow);
