@@ -1,5 +1,6 @@
 package ObsidianEngine.entity;
 
+import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
 import org.joml.Vector3f;
 import org.lwjgl.system.MemoryUtil;
@@ -49,12 +50,15 @@ public class Mesh {
         glDeleteVertexArrays(vao);
     }
 
-    public void Draw(){
+    public void Draw(Camera camera){
+        shader.bind();
+        shader.uploadMat4f("uProj",camera.getProjectionMatrix());
+        shader.uploadMat4f("uView",camera.getViewMatrix());
+
         glBindVertexArray(vao);
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
-        shader.bind();
         glDrawElements(GL_TRIANGLES, indices.length, GL_UNSIGNED_INT, 0);
         shader.unbind();
 

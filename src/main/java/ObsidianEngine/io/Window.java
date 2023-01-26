@@ -2,6 +2,7 @@ package ObsidianEngine.io;
 
 import ObsidianEngine.entity.Box;
 import ObsidianEngine.entity.Mesh;
+import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
 import org.joml.Vector3f;
 import org.lwjgl.Version;
@@ -20,6 +21,7 @@ public class Window {
     private Input inputsystem;
 
     private static Window window = null;
+    private Camera cam;
 
     private Mesh m;
 
@@ -45,6 +47,7 @@ public class Window {
         //Core Systems
         time = System.currentTimeMillis();
         inputsystem = new Input();
+        cam = new Camera(0,0,0);
 
         //Debug Logs
         GLFWErrorCallback.createPrint(System.err).set();
@@ -81,7 +84,6 @@ public class Window {
         GL.createCapabilities();
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        glOrtho(0,1, 0, 1, -1, 1);
         glMatrixMode(GL_MODELVIEW);
         glDisable(GL_DEPTH_TEST);
 
@@ -116,7 +118,7 @@ public class Window {
             glPushMatrix();
 
             //Render Objects
-            m.Draw();
+            m.Draw(cam);
 
             glPopMatrix();
             GLFW.glfwSwapBuffers(GLFWWindow);

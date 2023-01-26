@@ -12,10 +12,10 @@ public class Box extends Mesh {
 
          */
         super(new Vector3f[] {
-                new Vector3f(0.f,0.5f,0.0f),
-                new Vector3f(1,0.5f,0.0f),
-                new Vector3f(0.f,0.f,0.0f),
-                new Vector3f(1,0.f,0.0f)
+                new Vector3f(-50f,50f,0.0f),
+                new Vector3f(50f,50f,0.0f),
+                new Vector3f(-50f,-50f,0.0f),
+                new Vector3f(50f,-50f,0.0f)
         }, new int[]{
                 0, 1, 2,
                 0, 3, 2,

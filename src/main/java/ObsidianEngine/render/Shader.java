@@ -1,6 +1,11 @@
 package ObsidianEngine.render;
 
-import ObsidianEngine.Utils.FileUtils;
+import ObsidianEngine.utils.FileUtils;
+import org.joml.Matrix4f;
+import org.lwjgl.BufferUtils;
+
+import java.nio.FloatBuffer;
+
 import static org.lwjgl.opengl.GL20.*;
 
 public class Shader {
@@ -65,5 +70,12 @@ public class Shader {
 
     public void destroy(){
         glDeleteProgram(programID);
+    }
+
+    public void uploadMat4f(String varName, Matrix4f mat4){
+        int varLoc = glGetUniformLocation(programID,varName);
+        FloatBuffer matBuffer = BufferUtils.createFloatBuffer(16);
+        mat4.get(matBuffer);
+        glUniformMatrix4fv(varLoc,false,matBuffer);
     }
 }
