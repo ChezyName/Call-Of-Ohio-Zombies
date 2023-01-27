@@ -30,7 +30,7 @@ public class Camera {
     }
 
     public void setLookDir(float mouseX, float mouseY) {
-        yaw = -mouseX * 0.55f;
+        yaw = mouseX * 0.55f;
         pitch = -mouseY *  0.55f;
     }
 
@@ -39,14 +39,11 @@ public class Camera {
         float width = 25*16;
         float height = 25*9;
         //projectionMatrix.ortho(-width,width,-height,height,0.f,100.0f);
-
         projectionMatrix = new Matrix4f()
-                .perspective((float) Math.toRadians(90.0f), 16/9, 0.01f, 10000.0f)
+                .perspective((float) Math.toRadians(45.0f), (16/9), 0.01f, 10000.0f)
                 .lookAt(0.0f, 0.0f, 10.0f,
                         0.0f, 0.0f, 0.0f,
                         0.0f, 1.0f, 0.0f);
-
-
     }
 
     public void translate(float x, float y, float z){
