@@ -1,5 +1,7 @@
 package ObsidianEngine.utils;
 
+import ObsidianEngine.entity.Mesh;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,4 +22,10 @@ public class FileUtils {
 
         return File.toString();
     }
+
+    /*
+    public static Mesh LoadOBJ(){
+
+    }
+    */
 }

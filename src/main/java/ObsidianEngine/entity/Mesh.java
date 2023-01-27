@@ -2,6 +2,7 @@ package ObsidianEngine.entity;
 
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
+import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.lwjgl.system.MemoryUtil;
 
@@ -16,6 +17,8 @@ public class Mesh {
     private Vector3f[] vertices;
     private int[] indices;
     private Shader shader;
+
+    public Vector3f Position,Rotation,Scale;
 
     private int vao,pbo,ibo;
 

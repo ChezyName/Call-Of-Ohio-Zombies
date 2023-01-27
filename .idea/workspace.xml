@@ -10,10 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b516d30-da46-4da6-a7bf-c00ec8a86d27" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Winter2023GameJam_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Winter2023GameJam_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Box.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/render/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/render/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Mesh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/FileUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,12 +54,12 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/mineb/IdeaProjects/Winter2023GameJam/resources/shaders",
+    "last_opened_file_path": "C:/Users/mineb/IdeaProjects/Winter2023GameJam/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
@@ -69,16 +70,17 @@
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\resources\shaders" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar" />
+      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\production\resources" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\java\ObsidianEngine\Utils" />
-      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Game.Main">
+  <component name="RunManager" selected="JAR Application.Winter2023GameJam.jar">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Game.Main" />
       <module name="Winter2023GameJam.main" />
@@ -105,9 +107,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Game.Main" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="JAR Application.Winter2023GameJam.jar" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -120,6 +121,9 @@
       <option name="presentableId" value="Default" />
       <updated>1674616388814</updated>
       <workItem from="1674616389695" duration="38832000" />
+      <workItem from="1674792390070" duration="2541000" />
+      <workItem from="1674845229530" duration="1225000" />
+      <workItem from="1674849213486" duration="2163000" />
     </task>
     <servers />
   </component>
