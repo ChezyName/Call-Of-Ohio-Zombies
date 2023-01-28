@@ -55,8 +55,8 @@ public class Camera {
     public Matrix4f getViewMatrix(){
         Vector3f lookatpoint = new Vector3f(0,0,-1);
 
-        lookatpoint.rotateY((float)Math.toRadians(yaw),lookatpoint);
-        lookatpoint.rotateX((float)Math.toRadians(pitch),lookatpoint);
+        //lookatpoint.rotateY((float)Math.toRadians(yaw),lookatpoint);
+        //lookatpoint.rotateX((float)Math.toRadians(pitch),lookatpoint);
 
         lookatpoint.add(position,lookatpoint);
 

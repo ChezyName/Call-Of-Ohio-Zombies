@@ -4,6 +4,7 @@ import ObsidianEngine.entity.Box;
 import ObsidianEngine.entity.Mesh;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
+import ObsidianEngine.utils.FileUtils;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.Version;
@@ -15,6 +16,7 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.DoubleBuffer;
+import java.util.ArrayList;
 
 public class Window {
     private int width, height;
@@ -26,7 +28,7 @@ public class Window {
     private static Window window = null;
     private Camera cam;
 
-    private Mesh m;
+    private ArrayList<Mesh> Meshes = new ArrayList<Mesh>();
 
     private Window(){
         this.width = 1280;
@@ -88,7 +90,7 @@ public class Window {
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         glMatrixMode(GL_MODELVIEW);
-        glDisable(GL_DEPTH_TEST);
+        glEnable(GL_DEPTH_TEST);
 
         //Aspect Ratio 16:9
         glfwSetWindowAspectRatio(GLFWWindow,16,9);
@@ -98,9 +100,11 @@ public class Window {
         Shader.defaultShader = new Shader("/shaders/mainVertex.glsl","/shaders/mainFragment.glsl");
         Shader.defaultShader.create();
 
-        //Create Mesh
-        m = new Box(25,25,25,new Vector3f(0,0,0));
-        m.Create();
+        //Mesh m = new Box(25,25,25,new Vector3f(0,0,0));
+        //m.Create();
+        //Meshes.add(m);
+
+        FileUtils.LoadOBJ("/models/ExtendedCube.obj",Meshes);
     }
 
     private void FPSCalc(){
@@ -110,6 +114,12 @@ public class Window {
         GLFW.glfwSetWindowTitle(GLFWWindow,title + " | FPS: " + FPS);
 
         time = System.currentTimeMillis();
+    }
+
+    private void drawAllMeshes(){
+        for(Mesh m : Meshes){
+            m.Draw(cam);
+        }
     }
 
     private void loop() {
@@ -149,7 +159,7 @@ public class Window {
             glPushMatrix();
 
             //Render Objects
-            m.Draw(cam);
+            drawAllMeshes();
 
             glPopMatrix();
             GLFW.glfwSwapBuffers(GLFWWindow);
