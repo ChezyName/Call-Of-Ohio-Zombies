@@ -57,7 +57,7 @@ public class Window {
     private void init(){
         //Core Systems
         time = TimeUtils.getTimeUtils();
-        cam = new Camera(0,1.5f,3.25f);
+        cam = new Camera(0,20f,20f);
 
         //Debug Logs
         GLFWErrorCallback.createPrint(System.err).set();
@@ -109,10 +109,11 @@ public class Window {
 
         //Starting Meshes & Models
         //Ground
-        Mesh plane = new Plane(25,25,new Vector3f(0,0,0), ColorUtils.Green);
-        Meshes.add(plane);
+        Mesh Ground = new Plane(500,500,new Vector3f(0,0,0), ColorUtils.Green);
+        Meshes.add(Ground);
 
         Player = FileUtils.LoadOBJ("/models/Link.obj", ColorUtils.Black, Meshes);
+        Player.setScale(5);
     }
 
     private void drawAllMeshes(){
@@ -134,28 +135,11 @@ public class Window {
 
             //Controls
             float deltaTime = time.getDelta();
-            System.out.println("DELTATIME: " + deltaTime);
             if(Input.getKeyDown(GLFW_KEY_W)) Player.Translate(0,0,-(1.f)*deltaTime);
             if(Input.getKeyDown(GLFW_KEY_S)) Player.Translate(0,0,(1.f)*deltaTime);
             if(Input.getKeyDown(GLFW_KEY_A)) Player.Translate(-(1.f)*deltaTime,0,0);
             if(Input.getKeyDown(GLFW_KEY_D)) Player.Translate((1.f)*deltaTime,0,0);
             Player.Rotate(0,500*deltaTime,0);
-
-            //Mouse Positions
-            DoubleBuffer mouseX = BufferUtils.createDoubleBuffer(1);
-            DoubleBuffer mouseY = BufferUtils.createDoubleBuffer(1);
-            int newMouseX = -1;
-            int newMouseY = -1;
-
-            glfwGetCursorPos(GLFWWindow, mouseX, mouseY);
-            glfwSetInputMode(GLFWWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-
-            mouseX.rewind();
-            mouseY.rewind();
-            newMouseX = (int) mouseX.get(0);
-            newMouseY = (int) mouseY.get(0);
-
-            cam.setLookDir((float) newMouseX,(float) newMouseY);
 
             //Clear
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

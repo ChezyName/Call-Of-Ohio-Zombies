@@ -46,7 +46,7 @@ public class Camera {
     public void updateCameraAspectRatio(float width, float height){
         float aspectRatio = width/height;
         projectionMatrix = new Matrix4f()
-                .perspective((float) Math.toRadians(45.f), aspectRatio, 0.01f, 10000.0f)
+                .perspective((float) Math.toRadians(70.f), aspectRatio, 0.01f, 10000.0f)
                 .lookAt(0.0f, 0.0f, 10.0f,
                         0.0f, 0.0f, 0.0f,
                         0.0f, 1.0f, 0.0f);

@@ -83,6 +83,10 @@ public class Mesh {
         Rotate(rot);
     }
 
+    public void setScale(float ns){
+        this.Scale = ns;
+    }
+
     public void Rotate(Vector3f newRotation){
         this.Rotation.x += newRotation.x;
         this.Rotation.y += newRotation.y;
