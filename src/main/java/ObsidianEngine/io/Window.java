@@ -52,7 +52,7 @@ public class Window {
         //Core Systems
         time = System.currentTimeMillis();
         inputsystem = new Input();
-        cam = new Camera(0,0,100);
+        cam = new Camera(0,0,25);
 
         //Debug Logs
         GLFWErrorCallback.createPrint(System.err).set();
@@ -100,9 +100,9 @@ public class Window {
         Shader.defaultShader = new Shader("/shaders/mainVertex.glsl","/shaders/mainFragment.glsl");
         Shader.defaultShader.create();
 
-        //Mesh m = new Box(25,25,25,new Vector3f(0,0,0));
-        //m.Create();
-        //Meshes.add(m);
+        Mesh m = new Box(25,25,25,new Vector3f(0,-30,0));
+        m.Create();
+        Meshes.add(m);
 
         FileUtils.LoadOBJ("/models/ExtendedCube.obj",Meshes);
     }

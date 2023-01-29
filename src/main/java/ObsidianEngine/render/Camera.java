@@ -41,7 +41,7 @@ public class Camera {
         float aspectRatio = (16.f/9.f);
         projectionMatrix.ortho(-width,width,-height,height,0.f,100.0f);
         projectionMatrix = new Matrix4f()
-                .perspective((float) Math.toRadians(45.f), aspectRatio, 0.01f, 10000.0f)
+                .perspective((float) Math.toRadians(70), aspectRatio, 0.01f, 10000.0f)
                 .lookAt(0.0f, 0.0f, 10.0f,
                         0.0f, 0.0f, 0.0f,
                         0.0f, 1.0f, 0.0f);
@@ -58,7 +58,8 @@ public class Camera {
         Vector3f lookatpoint = new Vector3f(0,0,-1);
 
         //lookatpoint.rotateY((float)Math.toRadians(yaw),lookatpoint);
-        //lookatpoint.rotateX((float)Math.toRadians(pitch),lookatpoint);
+        //Turn camera 90 degrees facing down for top-down game
+        lookatpoint.rotateX((float)Math.toRadians(-45),lookatpoint);
 
         lookatpoint.add(position,lookatpoint);
 
