@@ -1,6 +1,7 @@
 package ObsidianEngine.io;
 
 import org.lwjgl.glfw.GLFW;
+import static  org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
@@ -17,7 +18,7 @@ public class Input {
     private GLFWMouseButtonCallback mouseButtons;
     private GLFWScrollCallback mouseScroll;
 
-    public Input() {
+    public Input(long Window) {
         keyboard = new GLFWKeyCallback() {
             public void invoke(long window, int key, int scancode, int action, int mods) {
                 keys[key] = (action != GLFW.GLFW_RELEASE);
@@ -43,9 +44,14 @@ public class Input {
                 scrollY += offsety;
             }
         };
+
+        glfwSetKeyCallback(Window,keyboard);
+        glfwSetCursorPosCallback(Window,mouseMove);
+        glfwSetMouseButtonCallback(Window,mouseButtons);
+        glfwSetScrollCallback(Window,mouseScroll);
     }
 
-    public static boolean isKeyDown(int key) {
+    public static boolean getKeyDown(int key) {
         return keys[key];
     }
 
@@ -53,11 +59,16 @@ public class Input {
         return buttons[button];
     }
 
-    public void destroy() {
-        keyboard.free();
-        mouseMove.free();
-        mouseButtons.free();
-        mouseScroll.free();
+    public void destroy(long Window) {
+        //keyboard.free();
+        //mouseMove.free();
+        //mouseButtons.free();
+        //mouseScroll.free();
+
+        glfwSetKeyCallback(Window,null);
+        glfwSetCursorPosCallback(Window,null);
+        glfwSetMouseButtonCallback(Window,null);
+        glfwSetScrollCallback(Window,null);
     }
 
     public static double getMouseX() {

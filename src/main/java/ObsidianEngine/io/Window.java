@@ -13,7 +13,10 @@ import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFW;
 import static  org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWWindowSizeCallbackI;
 import org.lwjgl.opengl.GL;
+
+import static org.lwjgl.glfw.GLFW.glfwSetWindowSizeCallback;
 import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.system.MemoryUtil;
 
@@ -31,11 +34,13 @@ public class Window {
     private Camera cam;
 
     private ArrayList<Mesh> Meshes = new ArrayList<Mesh>();
+    //CALLBACKS
+    GLFWWindowSizeCallbackI SizeChanged;
 
     private Window(){
         this.width = 1280;
         this.height = 720;
-        this.title = "WindowName";
+        this.title = "GAME NAME";
     }
 
     public static Window get() {
@@ -53,8 +58,7 @@ public class Window {
     private void init(){
         //Core Systems
         time = System.currentTimeMillis();
-        inputsystem = new Input();
-        cam = new Camera(0,0,6.5f);
+        cam = new Camera(0,1.5f,3.25f);
 
         //Debug Logs
         GLFWErrorCallback.createPrint(System.err).set();
@@ -63,7 +67,7 @@ public class Window {
         //Configure
         GLFW.glfwDefaultWindowHints();
         GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE,GLFW.GLFW_FALSE);
-        GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE,GLFW.GLFW_TRUE);
+        GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW_FALSE);
         GLFW.glfwWindowHint(GLFW.GLFW_MAXIMIZED,GLFW.GLFW_TRUE);
         GLFW.glfwDefaultWindowHints();
         GLFW.glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -97,11 +101,16 @@ public class Window {
         //Aspect Ratio 16:9
         glfwSetWindowAspectRatio(GLFWWindow,16,9);
 
+        //Disable Window Size Chaning
+
+        //Post Window Init CoreSystems
+        inputsystem = new Input(GLFWWindow);
         //Post OpenGL Init
         //Init Default Shader
         Shader.defaultShader = new Shader("/shaders/mainVertex.glsl","/shaders/mainFragment.glsl");
         Shader.defaultShader.create();
 
+        //Starting Meshes & Models
         //Ground
         Mesh plane = new Plane(25,25,new Vector3f(0,0,0), Colors.Green);
         Meshes.add(plane);
@@ -134,10 +143,10 @@ public class Window {
             GLFW.glfwPollEvents();
 
             //Camera Controls
-            if(glfwGetKey(GLFWWindow,GLFW_KEY_W) == GLFW_TRUE) cam.translate(0,0,-0.25f);
-            if(glfwGetKey(GLFWWindow,GLFW_KEY_S) == GLFW_TRUE) cam.translate(0,0,0.25f);
-            if(glfwGetKey(GLFWWindow,GLFW_KEY_A) == GLFW_TRUE) cam.translate(-0.25f,0,0);
-            if(glfwGetKey(GLFWWindow,GLFW_KEY_D) == GLFW_TRUE) cam.translate(0.25f,0,0);
+            if(Input.getKeyDown(GLFW_KEY_W)) cam.translate(0,0,-0.25f);
+            if(Input.getKeyDown(GLFW_KEY_S)) cam.translate(0,0,0.25f);
+            if(Input.getKeyDown(GLFW_KEY_A)) cam.translate(-0.25f,0,0);
+            if(Input.getKeyDown(GLFW_KEY_D)) cam.translate(0.25f,0,0);
 
             //Mouse Positions
             DoubleBuffer mouseX = BufferUtils.createDoubleBuffer(1);
@@ -170,7 +179,7 @@ public class Window {
         }
 
         //Cleanup
-        inputsystem.destroy();
+        inputsystem.destroy(GLFWWindow);
         GLFW.glfwDestroyWindow(GLFWWindow);
     }
 }
