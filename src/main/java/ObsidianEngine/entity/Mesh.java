@@ -2,8 +2,10 @@ package ObsidianEngine.entity;
 
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
+import ObsidianEngine.utils.MathUtils;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.lwjgl.system.MathUtil;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
@@ -19,7 +21,8 @@ public class Mesh {
     private int[] indices;
     private Shader shader;
 
-    private Vector3f Position,Rotation,Scale,Color;
+    private Vector3f Position,Rotation,Color;
+    private float Scale;
 
     private int vao,pbo,ibo;
 
@@ -28,6 +31,9 @@ public class Mesh {
         this.indices = indices;
         this.shader = shader;
         this.Color = Color;
+        this.Scale = 1;
+        this.Rotation = new Vector3f();
+        this.Position = new Vector3f();
         this.Create();
     }
 
@@ -60,11 +66,37 @@ public class Mesh {
         glDeleteVertexArrays(vao);
     }
 
+    public void Translate(float px, float py, float pz){
+        Vector3f normalizedVector = new Vector3f(px,py,pz).normalize();
+        this.Translate(normalizedVector);
+    }
+
+    public void Translate(Vector3f newPosition){
+        newPosition.normalize();
+        this.Position.x += newPosition.x;
+        this.Position.y += newPosition.y;
+        this.Position.z += newPosition.z;
+    }
+
+    public void Rotate(float rx,float ry,float rz){
+        Vector3f rot = new Vector3f(rx,ry,rz);
+        Rotate(rot);
+    }
+
+    public void Rotate(Vector3f newRotation){
+        this.Rotation.x += newRotation.x;
+        this.Rotation.y += newRotation.y;
+        this.Rotation.z += newRotation.z;
+    }
+
     public void Draw(Camera camera){
         shader.bind();
         shader.uploadMat4f("uProj",camera.getProjectionMatrix());
         shader.uploadMat4f("uView",camera.getViewMatrix());
         shader.uploadColor(Color);
+
+        Matrix4f Transform = MathUtils.createTransformationMatrix(this.Position,this.Rotation.x,this.Rotation.y,this.Rotation.z,this.Scale);
+        shader.uploadMat4f("uTransform",Transform);
 
         glBindVertexArray(vao);
         glEnableVertexAttribArray(0);

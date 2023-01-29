@@ -1,7 +1,7 @@
 package ObsidianEngine.entity;
 
 import ObsidianEngine.render.Shader;
-import ObsidianEngine.utils.Colors;
+import ObsidianEngine.utils.ColorUtils;
 import org.joml.Vector3f;
 
 public class Plane extends Mesh{
@@ -14,7 +14,7 @@ public class Plane extends Mesh{
         }, new int[] {
                 0,1,2,
                 1,2,3
-        }, Shader.defaultShader, Colors.White);
+        }, Shader.defaultShader, ColorUtils.White);
     }
 
     public Plane(float width, float depth, Vector3f position,Vector3f Color){

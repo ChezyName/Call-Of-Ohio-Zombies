@@ -1,12 +1,12 @@
 package ObsidianEngine.io;
 
-import ObsidianEngine.entity.Box;
 import ObsidianEngine.entity.Mesh;
 import ObsidianEngine.entity.Plane;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
-import ObsidianEngine.utils.Colors;
+import ObsidianEngine.utils.ColorUtils;
 import ObsidianEngine.utils.FileUtils;
+import ObsidianEngine.utils.TimeUtils;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.Version;
@@ -16,7 +16,6 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWWindowSizeCallbackI;
 import org.lwjgl.opengl.GL;
 
-import static org.lwjgl.glfw.GLFW.glfwSetWindowSizeCallback;
 import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.system.MemoryUtil;
 
@@ -27,15 +26,15 @@ public class Window {
     private int width, height;
     private String title;
     private long GLFWWindow;
-    private static long time;
+    private TimeUtils time;
     private Input inputsystem;
 
     private static Window window = null;
     private Camera cam;
+    private Mesh Player;
 
     private ArrayList<Mesh> Meshes = new ArrayList<Mesh>();
     //CALLBACKS
-    GLFWWindowSizeCallbackI SizeChanged;
 
     private Window(){
         this.width = 1280;
@@ -57,7 +56,7 @@ public class Window {
 
     private void init(){
         //Core Systems
-        time = System.currentTimeMillis();
+        time = TimeUtils.getTimeUtils();
         cam = new Camera(0,1.5f,3.25f);
 
         //Debug Logs
@@ -101,8 +100,6 @@ public class Window {
         //Aspect Ratio 16:9
         glfwSetWindowAspectRatio(GLFWWindow,16,9);
 
-        //Disable Window Size Chaning
-
         //Post Window Init CoreSystems
         inputsystem = new Input(GLFWWindow);
         //Post OpenGL Init
@@ -112,19 +109,10 @@ public class Window {
 
         //Starting Meshes & Models
         //Ground
-        Mesh plane = new Plane(25,25,new Vector3f(0,0,0), Colors.Green);
+        Mesh plane = new Plane(25,25,new Vector3f(0,0,0), ColorUtils.Green);
         Meshes.add(plane);
 
-        FileUtils.LoadOBJ("/models/Link.obj", Colors.Black, Meshes);
-    }
-
-    private void FPSCalc(){
-        float TimeBetween = System.currentTimeMillis() - time;
-
-        int FPS = (int)(1000/TimeBetween);
-        GLFW.glfwSetWindowTitle(GLFWWindow,title + " | FPS: " + FPS);
-
-        time = System.currentTimeMillis();
+        Player = FileUtils.LoadOBJ("/models/Link.obj", ColorUtils.Black, Meshes);
     }
 
     private void drawAllMeshes(){
@@ -142,11 +130,16 @@ public class Window {
             //Get Events
             GLFW.glfwPollEvents();
 
-            //Camera Controls
-            if(Input.getKeyDown(GLFW_KEY_W)) cam.translate(0,0,-0.25f);
-            if(Input.getKeyDown(GLFW_KEY_S)) cam.translate(0,0,0.25f);
-            if(Input.getKeyDown(GLFW_KEY_A)) cam.translate(-0.25f,0,0);
-            if(Input.getKeyDown(GLFW_KEY_D)) cam.translate(0.25f,0,0);
+            GLFW.glfwSetWindowTitle(GLFWWindow,title + " | FPS: " + time.getFPS());
+
+            //Controls
+            float deltaTime = time.getDelta();
+            System.out.println("DELTATIME: " + deltaTime);
+            if(Input.getKeyDown(GLFW_KEY_W)) Player.Translate(0,0,-(1.f)*deltaTime);
+            if(Input.getKeyDown(GLFW_KEY_S)) Player.Translate(0,0,(1.f)*deltaTime);
+            if(Input.getKeyDown(GLFW_KEY_A)) Player.Translate(-(1.f)*deltaTime,0,0);
+            if(Input.getKeyDown(GLFW_KEY_D)) Player.Translate((1.f)*deltaTime,0,0);
+            Player.Rotate(0,500*deltaTime,0);
 
             //Mouse Positions
             DoubleBuffer mouseX = BufferUtils.createDoubleBuffer(1);
@@ -173,9 +166,6 @@ public class Window {
 
             glPopMatrix();
             GLFW.glfwSwapBuffers(GLFWWindow);
-
-            //FPS
-            FPSCalc();
         }
 
         //Cleanup

@@ -1,7 +1,7 @@
 package ObsidianEngine.entity;
 
 import ObsidianEngine.render.Shader;
-import ObsidianEngine.utils.Colors;
+import ObsidianEngine.utils.ColorUtils;
 import org.joml.Vector3f;
 
 public class Box extends Mesh {
@@ -121,6 +121,6 @@ public class Box extends Mesh {
 
                 20,21,22,
                 21,22,23
-        }, Shader.defaultShader, Colors.White);
+        }, Shader.defaultShader, ColorUtils.White);
     }
 }

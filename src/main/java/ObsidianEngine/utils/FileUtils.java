@@ -31,12 +31,13 @@ public class FileUtils {
 
     private static String getJarLoc() { return new File(FileUtils.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent(); }
 
-    public static void LoadOBJ(String path,ArrayList<Mesh> AllMeshes){
+    public static Mesh LoadOBJ(String path,ArrayList<Mesh> AllMeshes){
         //System.out.println(getJarLoc());
         AIScene scene = Assimp.aiImportFile(getJarLoc() + path,Assimp.aiProcess_Triangulate);
 
-        if(scene == null) { System.err.println("Couldn't Find File: " + path); return; }
+        if(scene == null) { System.err.println("Couldn't Find File: " + path); return null; }
 
+        Mesh FinalM = null;
         PointerBuffer buffer = scene.mMeshes();
         for(int i = 0; i < buffer.limit(); i++){
             AIMesh mesh = AIMesh.create(buffer.get(i));
@@ -62,18 +63,19 @@ public class FileUtils {
                 indicies[k * 3 + 2] = FB.get(k).mIndices().get(2);
             }
 
-            Mesh m = new Mesh(verticies,indicies, Shader.defaultShader,Colors.RandColor());
-            m.Create();
+            Mesh m = new Mesh(verticies,indicies, Shader.defaultShader, ColorUtils.RandColor());
+            FinalM = m;
             AllMeshes.add(m);
         }
+        return FinalM;
     }
 
-    public static void LoadOBJ(String path,Vector3f Color, ArrayList<Mesh> AllMeshes){
+    public static Mesh LoadOBJ(String path,Vector3f Color, ArrayList<Mesh> AllMeshes){
         //System.out.println(getJarLoc());
         AIScene scene = Assimp.aiImportFile(getJarLoc() + path,Assimp.aiProcess_Triangulate);
 
-        if(scene == null) { System.err.println("Couldn't Find File: " + path); return; }
-
+        if(scene == null) { System.err.println("Couldn't Find File: " + path); return null; }
+        Mesh FinalM = null;
         PointerBuffer buffer = scene.mMeshes();
         for(int i = 0; i < buffer.limit(); i++){
             AIMesh mesh = AIMesh.create(buffer.get(i));
@@ -92,7 +94,7 @@ public class FileUtils {
                 verticies[j] = new Vector3f(VB.get(j).x(),VB.get(j).y(),VB.get(j).z());
             }
 
-            //IIndices calculation
+            //Indices calculation
             for(int k = 0; k < fc; k++){
                 indicies[k * 3 + 0] = FB.get(k).mIndices().get(0);
                 indicies[k * 3 + 1] = FB.get(k).mIndices().get(1);
@@ -100,8 +102,9 @@ public class FileUtils {
             }
 
             Mesh m = new Mesh(verticies,indicies, Shader.defaultShader,Color);
-            m.Create();
+            FinalM = m;
             AllMeshes.add(m);
         }
+        return FinalM;
     }
 }

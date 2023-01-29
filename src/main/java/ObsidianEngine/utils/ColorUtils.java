@@ -3,7 +3,7 @@ package ObsidianEngine.utils;
 import org.joml.Random;
 import org.joml.Vector3f;
 
-public class Colors {
+public class ColorUtils {
     public static Vector3f Black = new Vector3f(0,0,0);
     public static Vector3f White = new Vector3f(255,255,255);
 
