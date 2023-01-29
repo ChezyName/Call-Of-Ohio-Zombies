@@ -8,6 +8,7 @@ import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.util.Vector;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
@@ -18,14 +19,20 @@ public class Mesh {
     private int[] indices;
     private Shader shader;
 
-    public Vector3f Position,Rotation,Scale;
+    private Vector3f Position,Rotation,Scale,Color;
 
     private int vao,pbo,ibo;
 
-    public Mesh(Vector3f[] vertices, int[] indices, Shader shader){
+    public Mesh(Vector3f[] vertices, int[] indices, Shader shader, Vector3f Color){
         this.vertices = vertices;
         this.indices = indices;
         this.shader = shader;
+        this.Color = Color;
+        this.Create();
+    }
+
+    public void setColor(Vector3f color){
+        this.Color = color;
     }
 
     public Vector3f[] getVertices() {
@@ -57,6 +64,7 @@ public class Mesh {
         shader.bind();
         shader.uploadMat4f("uProj",camera.getProjectionMatrix());
         shader.uploadMat4f("uView",camera.getViewMatrix());
+        shader.uploadColor(Color);
 
         glBindVertexArray(vao);
         glEnableVertexAttribArray(0);

@@ -2,8 +2,10 @@ package ObsidianEngine.io;
 
 import ObsidianEngine.entity.Box;
 import ObsidianEngine.entity.Mesh;
+import ObsidianEngine.entity.Plane;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
+import ObsidianEngine.utils.Colors;
 import ObsidianEngine.utils.FileUtils;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
@@ -52,7 +54,7 @@ public class Window {
         //Core Systems
         time = System.currentTimeMillis();
         inputsystem = new Input();
-        cam = new Camera(0,0,25);
+        cam = new Camera(0,0,6.5f);
 
         //Debug Logs
         GLFWErrorCallback.createPrint(System.err).set();
@@ -100,11 +102,11 @@ public class Window {
         Shader.defaultShader = new Shader("/shaders/mainVertex.glsl","/shaders/mainFragment.glsl");
         Shader.defaultShader.create();
 
-        Mesh m = new Box(25,25,25,new Vector3f(0,-30,0));
-        m.Create();
-        Meshes.add(m);
+        //Ground
+        Mesh plane = new Plane(25,25,new Vector3f(0,0,0), Colors.Green);
+        Meshes.add(plane);
 
-        FileUtils.LoadOBJ("/models/ExtendedCube.obj",Meshes);
+        FileUtils.LoadOBJ("/models/Link.obj", Colors.Black, Meshes);
     }
 
     private void FPSCalc(){
@@ -131,12 +133,11 @@ public class Window {
             //Get Events
             GLFW.glfwPollEvents();
 
-            if(glfwGetKey(GLFWWindow,GLFW_KEY_W) == GLFW_TRUE) cam.translate(0,0,-1);
-            if(glfwGetKey(GLFWWindow,GLFW_KEY_S) == GLFW_TRUE) cam.translate(0,0,1);
-            if(glfwGetKey(GLFWWindow,GLFW_KEY_A) == GLFW_TRUE) cam.translate(-1,0,0);
-            if(glfwGetKey(GLFWWindow,GLFW_KEY_D) == GLFW_TRUE) cam.translate(1,0,0);
-            if(glfwGetKey(GLFWWindow,GLFW_KEY_E) == GLFW_TRUE) cam.translate(0,1,0);
-            if(glfwGetKey(GLFWWindow,GLFW_KEY_Q) == GLFW_TRUE) cam.translate(0,-1,0);
+            //Camera Controls
+            if(glfwGetKey(GLFWWindow,GLFW_KEY_W) == GLFW_TRUE) cam.translate(0,0,-0.25f);
+            if(glfwGetKey(GLFWWindow,GLFW_KEY_S) == GLFW_TRUE) cam.translate(0,0,0.25f);
+            if(glfwGetKey(GLFWWindow,GLFW_KEY_A) == GLFW_TRUE) cam.translate(-0.25f,0,0);
+            if(glfwGetKey(GLFWWindow,GLFW_KEY_D) == GLFW_TRUE) cam.translate(0.25f,0,0);
 
             //Mouse Positions
             DoubleBuffer mouseX = BufferUtils.createDoubleBuffer(1);

@@ -2,9 +2,11 @@ package ObsidianEngine.render;
 
 import ObsidianEngine.utils.FileUtils;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
+import java.util.Vector;
 
 import static org.lwjgl.opengl.GL20.*;
 
@@ -77,5 +79,10 @@ public class Shader {
         FloatBuffer matBuffer = BufferUtils.createFloatBuffer(16);
         mat4.get(matBuffer);
         glUniformMatrix4fv(varLoc,false,matBuffer);
+    }
+
+    public void uploadColor(Vector3f Color){
+        int colorLoc = glGetUniformLocation(programID,"InputColor");
+        glUniform3f(colorLoc,Color.x/255,Color.y/255,Color.z/255);
     }
 }
