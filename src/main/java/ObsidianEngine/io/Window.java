@@ -124,8 +124,6 @@ public class Window {
 
     private void loop() {
         glClearColor(0.f, 1.f, 1.f, 1.f);
-        //Locks Mouse To Screen / Hids Mosue
-        glfwSetInputMode(GLFWWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
         while (!GLFW.glfwWindowShouldClose(GLFWWindow)) {
             //Get Events
