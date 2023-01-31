@@ -37,6 +37,10 @@ public class Mesh {
         this.Create();
     }
 
+    public Vector3f getPosition(){
+        return Position;
+    }
+
     public void setColor(Vector3f color){
         this.Color = color;
     }
@@ -81,6 +85,16 @@ public class Mesh {
     public void Rotate(float rx,float ry,float rz){
         Vector3f rot = new Vector3f(rx,ry,rz);
         Rotate(rot);
+    }
+
+    public void setRotation(float rx, float ry, float rz){
+        setRotation(new Vector3f(rx,ry,rz));
+    }
+
+    public void setRotation(Vector3f rotation){
+        this.Rotation.x = rotation.x;
+        this.Rotation.y = rotation.y;
+        this.Rotation.z = rotation.z;
     }
 
     public void setScale(float ns){

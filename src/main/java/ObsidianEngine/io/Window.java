@@ -1,11 +1,13 @@
 package ObsidianEngine.io;
 
+import ObsidianEngine.entity.Box;
 import ObsidianEngine.entity.Mesh;
 import ObsidianEngine.entity.Plane;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
 import ObsidianEngine.utils.ColorUtils;
 import ObsidianEngine.utils.FileUtils;
+import ObsidianEngine.utils.MouseUtils;
 import ObsidianEngine.utils.TimeUtils;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
@@ -21,6 +23,7 @@ import org.lwjgl.system.MemoryUtil;
 
 import java.nio.DoubleBuffer;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class Window {
     private int width, height;
@@ -57,7 +60,8 @@ public class Window {
     private void init(){
         //Core Systems
         time = TimeUtils.getTimeUtils();
-        cam = new Camera(0,20f,20f);
+        cam = new Camera(0,50f,0f);
+
 
         //Debug Logs
         GLFWErrorCallback.createPrint(System.err).set();
@@ -109,7 +113,7 @@ public class Window {
 
         //Starting Meshes & Models
         //Ground
-        Mesh Ground = new Plane(500,500,new Vector3f(0,0,0), ColorUtils.Green);
+        Mesh Ground = new Plane(250,250,new Vector3f(0,0,0), ColorUtils.Green);
         Meshes.add(Ground);
 
         Player = FileUtils.LoadOBJ("/models/Link.obj", ColorUtils.Black, Meshes);
@@ -133,11 +137,15 @@ public class Window {
 
             //Controls
             float deltaTime = time.getDelta();
-            if(Input.getKeyDown(GLFW_KEY_W)) Player.Translate(0,0,-(1.f)*deltaTime);
-            if(Input.getKeyDown(GLFW_KEY_S)) Player.Translate(0,0,(1.f)*deltaTime);
-            if(Input.getKeyDown(GLFW_KEY_A)) Player.Translate(-(1.f)*deltaTime,0,0);
-            if(Input.getKeyDown(GLFW_KEY_D)) Player.Translate((1.f)*deltaTime,0,0);
-            Player.Rotate(0,500*deltaTime,0);
+            if(Input.getKeyDown(GLFW_KEY_W)) Player.Translate(0,0,-(0.15f)*deltaTime);
+            if(Input.getKeyDown(GLFW_KEY_S)) Player.Translate(0,0,(0.15f)*deltaTime);
+            if(Input.getKeyDown(GLFW_KEY_A)) Player.Translate(-(0.15f)*deltaTime,0,0);
+            if(Input.getKeyDown(GLFW_KEY_D)) Player.Translate((0.15f)*deltaTime,0,0);
+
+            Player.setRotation(0,MouseUtils.getMouseRotFromCenter(GLFWWindow),0);
+
+            //Set Camera position to player position
+            cam.setPosition(Player.getPosition().x,50,Player.getPosition().z);
 
             //Clear
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

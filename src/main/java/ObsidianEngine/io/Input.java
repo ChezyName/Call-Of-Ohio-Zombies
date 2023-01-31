@@ -55,7 +55,7 @@ public class Input {
         return keys[key];
     }
 
-    public static boolean isButtonDown(int button) {
+    public static boolean isMouseButtonDown(int button) {
         return buttons[button];
     }
 
