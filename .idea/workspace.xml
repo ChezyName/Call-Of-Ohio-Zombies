@@ -11,10 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5b516d30-da46-4da6-a7bf-c00ec8a86d27" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Mesh.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Input.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/render/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/render/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/FileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/MathUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/MathUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,6 +150,10 @@
       <workItem from="1674949396452" duration="19844000" />
       <workItem from="1675104475155" duration="3921000" />
       <workItem from="1675119625417" duration="13365000" />
+      <workItem from="1675134862515" duration="616000" />
+      <workItem from="1675140718403" duration="697000" />
+      <workItem from="1675178913837" duration="941000" />
+      <workItem from="1675227754746" duration="19000" />
     </task>
     <servers />
   </component>

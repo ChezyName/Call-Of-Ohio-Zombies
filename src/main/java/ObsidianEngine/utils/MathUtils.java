@@ -15,4 +15,8 @@ public class MathUtils {
         m.scale(scale);
         return m;
     }
+
+    public static void getForwardVector(Vector3f Position, float angleForward){
+
+    }
 }

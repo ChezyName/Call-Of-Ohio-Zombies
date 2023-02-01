@@ -29,7 +29,7 @@ public class FileUtils {
         return File.toString();
     }
 
-    private static String getJarLoc() { return new File(FileUtils.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent(); }
+    public static String getJarLoc() { return new File(FileUtils.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent(); }
 
     public static Mesh LoadOBJ(String path,ArrayList<Mesh> AllMeshes){
         //System.out.println(getJarLoc());
