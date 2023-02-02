@@ -101,6 +101,7 @@ public class Window {
         glLoadIdentity();
         glMatrixMode(GL_MODELVIEW);
         glEnable(GL_DEPTH_TEST);
+        glEnable(GL_TEXTURE_2D);
 
         //Aspect Ratio 16:9
         glfwSetWindowAspectRatio(GLFWWindow,16,9);
@@ -114,9 +115,8 @@ public class Window {
 
         //Starting Meshes & Models
         //Ground
-        Mesh Ground = new Plane(250,250,new Vector3f(0,0,0), ColorUtils.Green);
+        Mesh Ground = new Plane(25,25,new Vector3f(0,0,0), ColorUtils.Green);
         Ground.setTexture(new Texture("/imgs/Test.png"));
-        Ground.setUVs(new int[] {0,0,0,1,1,0,1,1});
         Ground.setShader(Shader.defaultTextureShader);
         Ground.Create();
         Meshes.add(Ground);

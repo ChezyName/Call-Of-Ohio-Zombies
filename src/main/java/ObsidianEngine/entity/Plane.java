@@ -14,7 +14,14 @@ public class Plane extends Mesh{
         }, new int[] {
                 0,1,2,
                 1,2,3
-        }, Shader.defaultShader, ColorUtils.White);
+        }, Shader.defaultShader, ColorUtils.White,
+                new float[] {
+                        0,1,
+                        0,0,
+                        1,1,
+                        1,0
+
+                });
     }
 
     public Plane(float width, float depth, Vector3f position,Vector3f Color){
@@ -26,6 +33,13 @@ public class Plane extends Mesh{
         }, new int[] {
                 0,1,2,
                 1,2,3
-        }, Shader.defaultShader, Color);
+        }, Shader.defaultShader, Color,
+                new float[] {
+                        0,1,
+                        0,0,
+                        1,1,
+                        1,0
+
+                });
     }
 }

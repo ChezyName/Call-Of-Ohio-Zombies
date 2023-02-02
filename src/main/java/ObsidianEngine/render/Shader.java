@@ -2,6 +2,7 @@ package ObsidianEngine.render;
 
 import ObsidianEngine.utils.FileUtils;
 import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 
@@ -93,5 +94,10 @@ public class Shader {
     public void uploadTexture(int slot) {
         int TextureLoc = glGetUniformLocation(programID,"InputTexture");
         glUniform1i(TextureLoc,slot);
+    }
+
+    public void uploadVec2(String name, Vector2f vec){
+        int Loc = glGetUniformLocation(programID,name);
+        glUniform2f(Loc,vec.x,vec.y);
     }
 }

@@ -41,9 +41,12 @@ public class Texture {
             System.err.println("[TEXTURE LOADING] Image: " + filePath + " Could not be loaded...");
         }
         else{
+            glPixelStorei(GL_UNPACK_ALIGNMENT,1);
             glTexImage2D(GL_TEXTURE_2D,0, GL_RGB, width.get(0), height.get(0), 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+            glGenerateMipmap(GL_TEXTURE_2D);
             STBImage.stbi_image_free(image);
         }
+        this.unbind();
     }
 
     public int getID() { return ID; }

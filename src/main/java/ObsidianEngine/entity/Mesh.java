@@ -20,7 +20,7 @@ import static org.lwjgl.opengl.GL30.*;
 public class Mesh {
     private Vector3f[] vertices;
     private int[] indices;
-    private int[] UVs;
+    private float[] UVs;
     private Shader shader;
     private Texture texture;
 
@@ -40,11 +40,22 @@ public class Mesh {
         this.Create();
     }
 
-    public Mesh(Vector3f[] vertices, int[] indices, Shader shader, Texture texture, int[] UV){
+    public Mesh(Vector3f[] vertices, int[] indices, Shader shader, Vector3f Color, float[] UV){
         this.vertices = vertices;
         this.indices = indices;
         this.shader = shader;
         this.Color = Color;
+        this.Scale = 1;
+        this.Rotation = new Vector3f();
+        this.Position = new Vector3f();
+        this.Create();
+        this.UVs = UV;
+    }
+
+    public Mesh(Vector3f[] vertices, int[] indices, Shader shader, Texture texture, float[] UV){
+        this.vertices = vertices;
+        this.indices = indices;
+        this.shader = shader;
         this.Scale = 1;
         this.Rotation = new Vector3f();
         this.Position = new Vector3f();
@@ -57,7 +68,7 @@ public class Mesh {
         this.texture = texture;
     }
 
-    public void setUVs( int[] UV){
+    public void setUVs( float[] UV){
         this.UVs = UV;
     }
     public void setShader(Shader shader){this.shader = shader;}
@@ -138,26 +149,22 @@ public class Mesh {
         shader.uploadMat4f("uView",camera.getViewMatrix());
         shader.uploadColor(Color);
 
+        glBindVertexArray(vao);
+        glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+
         //Textures
         if(texture != null){
-            shader.uploadTexture(0);
             glActiveTexture(GL_TEXTURE0);
             texture.bind();
+            shader.uploadTexture(0);
         }
 
         Matrix4f Transform = MathUtils.createTransformationMatrix(this.Position,this.Rotation.x,this.Rotation.y,this.Rotation.z,this.Scale);
         shader.uploadMat4f("uTransform",Transform);
 
-
-        //position layout
-        glBindVertexArray(vao);
-        glEnableVertexAttribArray(0);
-        glEnableVertexAttribArray(1);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-
         glDrawElements(GL_TRIANGLES, indices.length, GL_UNSIGNED_INT, 0);
-
-        //UNbinding
 
         shader.unbind();
         if(texture != null) texture.unbind();
@@ -196,13 +203,13 @@ public class Mesh {
 
 
         if(this.UVs != null){
-            IntBuffer UVBuffer = MemoryUtil.memAllocInt(UVs.length);
-            UVBuffer.put(UVs).flip();
+            //Creating UV Buffer Objects
             uvbo = glGenBuffers();
+            FloatBuffer UVBuffer = MemoryUtil.memAllocFloat(UVs.length);
+            UVBuffer.put(UVs).flip();
             glBindBuffer(GL_ARRAY_BUFFER, uvbo);
             glBufferData(GL_ARRAY_BUFFER, UVBuffer, GL_STATIC_DRAW);
-            glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
-            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
         }
     }
 }
