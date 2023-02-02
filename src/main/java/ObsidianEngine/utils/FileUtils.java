@@ -29,6 +29,10 @@ public class FileUtils {
         return File.toString();
     }
 
+    public static String getFileNameResource(String path){
+        return FileUtils.class.getResource(path).getFile();
+    }
+
     public static String getJarLoc() { return new File(FileUtils.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent(); }
 
     public static Mesh LoadOBJ(String path,ArrayList<Mesh> AllMeshes){

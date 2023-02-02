@@ -11,14 +11,18 @@ import java.util.Vector;
 import static org.lwjgl.opengl.GL20.*;
 
 public class Shader {
-    private String vertexFile, fragmentFile;
+    private String vertexFile, fragmentFile,vertexPath,fragmentPath;
     private int vertexID, fragmentID, programID;
 
     public static Shader defaultShader;
+    public static Shader defaultTextureShader;
 
     public Shader(String vertPath, String fragPath){
         vertexFile = FileUtils.loadAsString(vertPath);
         fragmentFile = FileUtils.loadAsString(fragPath);
+        vertexPath = vertPath;
+        fragmentPath = fragPath;
+        this.create();
     }
 
     public void create(){
@@ -30,7 +34,7 @@ public class Shader {
 
         //Did'nt Compile & Err Catch
         if(glGetShaderi(vertexID,GL_COMPILE_STATUS) == GL_FALSE){
-            System.err.println("Vertex Shader: " + glGetShaderInfoLog(vertexID));
+            System.err.println("[" + FileUtils.getFileNameResource(vertexPath) + "] Vertex Shader: " + glGetShaderInfoLog(vertexID));
             return;
         }
 
@@ -41,7 +45,7 @@ public class Shader {
 
         //Did'nt Compile & Err Catch
         if(glGetShaderi(fragmentID,GL_COMPILE_STATUS) == GL_FALSE){
-            System.err.println("Fragment Shader: " + glGetShaderInfoLog(fragmentID));
+            System.err.println("[" + FileUtils.getFileNameResource(fragmentPath) + "] Fragment Shader: " + glGetShaderInfoLog(fragmentID));
             return;
         }
 
@@ -84,5 +88,10 @@ public class Shader {
     public void uploadColor(Vector3f Color){
         int colorLoc = glGetUniformLocation(programID,"InputColor");
         glUniform3f(colorLoc,Color.x/255,Color.y/255,Color.z/255);
+    }
+
+    public void uploadTexture(int slot) {
+        int TextureLoc = glGetUniformLocation(programID,"InputTexture");
+        glUniform1i(TextureLoc,slot);
     }
 }

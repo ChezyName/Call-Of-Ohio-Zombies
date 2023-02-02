@@ -5,6 +5,7 @@ import ObsidianEngine.entity.Mesh;
 import ObsidianEngine.entity.Plane;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
+import ObsidianEngine.render.Texture;
 import ObsidianEngine.utils.ColorUtils;
 import ObsidianEngine.utils.FileUtils;
 import ObsidianEngine.utils.MouseUtils;
@@ -109,11 +110,15 @@ public class Window {
         //Post OpenGL Init
         //Init Default Shader
         Shader.defaultShader = new Shader("/shaders/mainVertex.glsl","/shaders/mainFragment.glsl");
-        Shader.defaultShader.create();
+        Shader.defaultTextureShader  = new Shader("/shaders/TextureVertex.glsl","/shaders/TextureFragment.glsl");
 
         //Starting Meshes & Models
         //Ground
         Mesh Ground = new Plane(250,250,new Vector3f(0,0,0), ColorUtils.Green);
+        Ground.setTexture(new Texture("/imgs/Test.png"));
+        Ground.setUVs(new int[] {0,0,0,1,1,0,1,1});
+        Ground.setShader(Shader.defaultTextureShader);
+        Ground.Create();
         Meshes.add(Ground);
 
         Player = FileUtils.LoadOBJ("/models/Link.obj", ColorUtils.Black, Meshes);
