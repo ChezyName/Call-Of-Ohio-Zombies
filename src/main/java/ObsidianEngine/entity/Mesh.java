@@ -56,6 +56,7 @@ public class Mesh {
         this.vertices = vertices;
         this.indices = indices;
         this.shader = shader;
+        this.Color = new Vector3f(255,255,255);
         this.Scale = 1;
         this.Rotation = new Vector3f();
         this.Position = new Vector3f();

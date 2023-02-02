@@ -23,12 +23,13 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.DoubleBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.Vector;
 
 public class Window {
     private int width, height;
-    private String title;
+    private String title,versionNumber;
     private long GLFWWindow;
     private TimeUtils time;
     private Input inputsystem;
@@ -43,7 +44,8 @@ public class Window {
     private Window(){
         this.width = 1280;
         this.height = 720;
-        this.title = "GAME NAME";
+        this.title = "Chezy's Game";
+        this.versionNumber = "v0.1";
     }
 
     public static Window get() {
@@ -106,6 +108,7 @@ public class Window {
         //Aspect Ratio 16:9
         glfwSetWindowAspectRatio(GLFWWindow,16,9);
 
+
         //Post Window Init CoreSystems
         inputsystem = new Input(GLFWWindow);
         //Post OpenGL Init
@@ -113,15 +116,18 @@ public class Window {
         Shader.defaultShader = new Shader("/shaders/mainVertex.glsl","/shaders/mainFragment.glsl");
         Shader.defaultTextureShader  = new Shader("/shaders/TextureVertex.glsl","/shaders/TextureFragment.glsl");
 
+        //Set Cursor Image
+        MouseUtils.SetCursorImage(GLFWWindow,"/imgs/Crosshair.png");
+
         //Starting Meshes & Models
         //Ground
-        Mesh Ground = new Plane(25,25,new Vector3f(0,0,0), ColorUtils.Green);
-        Ground.setTexture(new Texture("/imgs/Test.png"));
+        Mesh Ground = new Plane(50,50,new Vector3f(0,0,0), ColorUtils.Green);
+        Ground.setTexture(new Texture("/imgs/Grass.jpg",true));
         Ground.setShader(Shader.defaultTextureShader);
         Ground.Create();
         Meshes.add(Ground);
 
-        Player = FileUtils.LoadOBJ("/models/Link.obj", ColorUtils.Black, Meshes);
+        Player = FileUtils.LoadOBJWTexture("/models/Link.obj", Meshes, new Texture("/imgs/PlayerTexture.png"));
         Player.setScale(5);
     }
 
@@ -132,20 +138,20 @@ public class Window {
     }
 
     private void loop() {
-        glClearColor(0.f, 1.f, 1.f, 1.f);
+        glClearColor(1,1,1,1);
 
         while (!GLFW.glfwWindowShouldClose(GLFWWindow)) {
             //Get Events
             GLFW.glfwPollEvents();
 
-            GLFW.glfwSetWindowTitle(GLFWWindow,title + " | FPS: " + time.getFPS());
+            GLFW.glfwSetWindowTitle(GLFWWindow,title + " " + versionNumber + " | " + time.getFPS() + " FPS");
 
             //Controls
             float deltaTime = time.getDelta();
-            if(Input.getKeyDown(GLFW_KEY_W)) Player.Translate(0,0,-(0.15f)*deltaTime);
-            if(Input.getKeyDown(GLFW_KEY_S)) Player.Translate(0,0,(0.15f)*deltaTime);
-            if(Input.getKeyDown(GLFW_KEY_A)) Player.Translate(-(0.15f)*deltaTime,0,0);
-            if(Input.getKeyDown(GLFW_KEY_D)) Player.Translate((0.15f)*deltaTime,0,0);
+            if(Input.getKeyDown(GLFW_KEY_W)) Player.Translate(0,0,-(0.05f)*deltaTime);
+            if(Input.getKeyDown(GLFW_KEY_S)) Player.Translate(0,0,(0.05f)*deltaTime);
+            if(Input.getKeyDown(GLFW_KEY_A)) Player.Translate(-(0.05f)*deltaTime,0,0);
+            if(Input.getKeyDown(GLFW_KEY_D)) Player.Translate((0.05f)*deltaTime,0,0);
 
             Player.setRotation(0,MouseUtils.getMouseRotFromCenter(GLFWWindow),0);
 
