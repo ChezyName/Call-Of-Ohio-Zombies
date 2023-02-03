@@ -1,5 +1,6 @@
 package ObsidianEngine.io;
 
+import Game.Map;
 import ObsidianEngine.entity.Box;
 import ObsidianEngine.entity.Mesh;
 import ObsidianEngine.entity.Plane;
@@ -10,6 +11,7 @@ import ObsidianEngine.utils.ColorUtils;
 import ObsidianEngine.utils.FileUtils;
 import ObsidianEngine.utils.MouseUtils;
 import ObsidianEngine.utils.TimeUtils;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.Version;
@@ -120,12 +122,9 @@ public class Window {
         MouseUtils.SetCursorImage(GLFWWindow,"/imgs/Crosshair.png");
 
         //Starting Meshes & Models
-        //Ground
-        Mesh Ground = new Plane(50,50,new Vector3f(0,0,0), ColorUtils.Green);
-        Ground.setTexture(new Texture("/imgs/Grass.jpg",true));
-        Ground.setShader(Shader.defaultTextureShader);
-        Ground.Create();
-        Meshes.add(Ground);
+        //Load Map
+        Map.getMap(100,50,Meshes);
+
 
         Player = FileUtils.LoadOBJWTexture("/models/Link.obj", Meshes, new Texture("/imgs/PlayerTexture.png"));
         Player.setScale(5);
