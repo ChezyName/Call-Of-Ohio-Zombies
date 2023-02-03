@@ -17,7 +17,7 @@ public class Map {
             while (startPos.x < size) {
                 //Create Squares
                 Mesh Ground = new Plane(incerment,incerment,new Vector3f(startPos.x,0,startPos.y), ColorUtils.Green);
-                Ground.setTexture(new Texture("/imgs/Grass.jpg",true));
+                Ground.setTexture(new Texture("/imgs/Grass.jpg",false));
                 Ground.setShader(Shader.defaultTextureShader);
                 Ground.Create();
                 Meshes.add(Ground);

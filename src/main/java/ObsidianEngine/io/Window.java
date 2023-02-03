@@ -123,11 +123,10 @@ public class Window {
 
         //Starting Meshes & Models
         //Load Map
-        Map.getMap(100,50,Meshes);
-
+        Map.getMap(500,50,Meshes);
 
         Player = FileUtils.LoadOBJWTexture("/models/Link.obj", Meshes, new Texture("/imgs/PlayerTexture.png"));
-        Player.setScale(5);
+        Player.setScale(50);
     }
 
     private void drawAllMeshes(){
@@ -147,15 +146,16 @@ public class Window {
 
             //Controls
             float deltaTime = time.getDelta();
-            if(Input.getKeyDown(GLFW_KEY_W)) Player.Translate(0,0,-(0.05f)*deltaTime);
-            if(Input.getKeyDown(GLFW_KEY_S)) Player.Translate(0,0,(0.05f)*deltaTime);
-            if(Input.getKeyDown(GLFW_KEY_A)) Player.Translate(-(0.05f)*deltaTime,0,0);
-            if(Input.getKeyDown(GLFW_KEY_D)) Player.Translate((0.05f)*deltaTime,0,0);
+            float pDelta = (deltaTime/50);
+            if(Input.getKeyDown(GLFW_KEY_W)) Player.Translate(0,0,-(0.01f)*pDelta);
+            if(Input.getKeyDown(GLFW_KEY_S)) Player.Translate(0,0,(0.1f)*pDelta);
+            if(Input.getKeyDown(GLFW_KEY_A)) Player.Translate(-(0.01f)*pDelta,0,0);
+            if(Input.getKeyDown(GLFW_KEY_D)) Player.Translate((0.01f)*pDelta,0,0);
 
             Player.setRotation(0,MouseUtils.getMouseRotFromCenter(GLFWWindow),0);
 
             //Set Camera position to player position
-            cam.setPosition(Player.getPosition().x,50,Player.getPosition().z);
+            cam.setPosition(Player.getPosition().x,400,Player.getPosition().z);
 
             //Clear
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

@@ -31,7 +31,10 @@ public class MouseUtils {
         int height = heightBuffer.get(0);
 
         float x = (2.0f * mouseX) / width - 1.0f;
-        float y = 1.0f - (2.0f * mouseY) / height;
+        float y = 1.0f - ((2.0f * mouseY) / height);
+        y *= (9.f/16.f);
+
+        System.out.println("(" + x + "," + y + ")");
 
         //Calculate Rotation Angle
         float angle = (float) Math.toDegrees(Math.atan2(y, x));

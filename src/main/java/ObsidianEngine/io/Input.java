@@ -72,10 +72,12 @@ public class Input {
     }
 
     public static double getMouseX() {
+        //System.err.println("X: " + mouseX);
         return mouseX;
     }
 
     public static double getMouseY() {
+        //System.err.println("Y: " + mouseY);
         return mouseY;
     }
 
