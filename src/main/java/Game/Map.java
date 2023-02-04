@@ -50,6 +50,10 @@ public class Map {
     }
     public static void getMap(float size,float incerment, ArrayList<Mesh> Meshes,Camera cam,long WindowID){
         Vector2f startPos = new Vector2f(-size,-size);
+
+        int maxPieces = (int) (incerment*4)*2;
+        int currentPiece = 1;
+
         while (startPos.y < size){
             while (startPos.x < size) {
                 //Create Squares
@@ -59,7 +63,8 @@ public class Map {
                 Ground.Create();
                 Meshes.add(Ground);
 
-                System.out.println("Map Space @ " + startPos.x + "," + startPos.y);
+                System.out.println("[BUILDING MAP]" + currentPiece + "/" + maxPieces);
+                currentPiece++;
 
                 startPos.x += incerment;
 

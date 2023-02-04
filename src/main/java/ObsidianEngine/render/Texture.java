@@ -36,11 +36,13 @@ public class Texture {
         IntBuffer height = BufferUtils.createIntBuffer(1);
         IntBuffer colorChannels = BufferUtils.createIntBuffer(1);
 
+        String fileLoc = new File(FileUtils.getJarLoc() + filePath).getPath();
+
         //RGB Data
-        ByteBuffer image = STBImage.stbi_load(FileUtils.getJarLoc() + filePath,width,height,colorChannels, 0);
+        ByteBuffer image = STBImage.stbi_load(fileLoc,width,height,colorChannels, 0);
 
         if(image == null){
-            System.err.println("[TEXTURE LOADING] Image: " + filePath + " Could not be loaded...");
+            System.err.println("[TEXTURE LOADING] Image: " + FileUtils.getJarLoc() + filePath + " Could not be loaded...");
         }
         else{
             glPixelStorei(GL_UNPACK_ALIGNMENT,1);

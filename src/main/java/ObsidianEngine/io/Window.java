@@ -122,7 +122,7 @@ public class Window {
 
         //Starting Meshes & Models
         //Load Map
-        Map.getMap(800,50,Meshes,cam,GLFWWindow);
+        Map.getMap(550,50,Meshes,cam,GLFWWindow);
 
         Player = FileUtils.LoadOBJWTexture("/models/Link.obj", Meshes, new Texture("/imgs/PlayerTexture.png"));
         Player.setPosition(-30,0,0);
