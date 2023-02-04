@@ -65,7 +65,7 @@ public class Window {
     private void init(){
         //Core Systems
         time = TimeUtils.getTimeUtils();
-        cam = new Camera(0,50f,0f);
+        cam = new Camera(-30,400f,0f);
 
 
         //Debug Logs
@@ -110,7 +110,6 @@ public class Window {
         //Aspect Ratio 16:9
         glfwSetWindowAspectRatio(GLFWWindow,16,9);
 
-
         //Post Window Init CoreSystems
         inputsystem = new Input(GLFWWindow);
         //Post OpenGL Init
@@ -123,9 +122,10 @@ public class Window {
 
         //Starting Meshes & Models
         //Load Map
-        Map.getMap(500,50,Meshes);
+        Map.getMap(800,50,Meshes,cam,GLFWWindow);
 
         Player = FileUtils.LoadOBJWTexture("/models/Link.obj", Meshes, new Texture("/imgs/PlayerTexture.png"));
+        Player.setPosition(-30,0,0);
         Player.setScale(50);
     }
 
@@ -136,7 +136,7 @@ public class Window {
     }
 
     private void loop() {
-        glClearColor(1,1,1,1);
+        glClearColor(0,0,0,1);
 
         while (!GLFW.glfwWindowShouldClose(GLFWWindow)) {
             //Get Events

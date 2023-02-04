@@ -12,7 +12,7 @@
     <list default="true" id="5b516d30-da46-4da6-a7bf-c00ec8a86d27" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Mesh.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/MouseUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/MouseUtils.java" afterDir="false" />
     </list>
@@ -65,24 +65,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/mineb/IdeaProjects/Winter2023GameJam/out/artifacts/Winter2023GameJam_jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mineb/IdeaProjects/Winter2023GameJam/out/artifacts/Winter2023GameJam_jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar" />
@@ -169,6 +169,7 @@
       <workItem from="1675392205757" duration="12000" />
       <workItem from="1675445451902" duration="6000" />
       <workItem from="1675447403597" duration="8609000" />
+      <workItem from="1675474171177" duration="3068000" />
     </task>
     <servers />
   </component>

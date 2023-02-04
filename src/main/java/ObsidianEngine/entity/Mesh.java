@@ -77,6 +77,17 @@ public class Mesh {
     public Vector3f getPosition(){
         return Position;
     }
+    public void setPosition(Vector3f pos){
+        this.Position.x = pos.x;
+        this.Position.y = pos.y;
+        this.Position.z = pos.z;
+    }
+
+    public void setPosition(float nx, float ny, float nz){
+        this.Position.x = nx;
+        this.Position.y = ny;
+        this.Position.z = nz;
+    }
 
     public void setColor(Vector3f color){
         this.Color = color;
