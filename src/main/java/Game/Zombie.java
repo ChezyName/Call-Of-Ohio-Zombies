@@ -21,11 +21,12 @@ public class Zombie {
 
         float X = (StartPosiition.x) + (MathUtils.getRandomNumber() * (Radius/2));
         float Y = (StartPosiition.y) + (MathUtils.getRandomNumber() * (Radius/2));
-        Zombie.setPosition(50,0,0);
+        Zombie.setPosition(350,0,0);
     }
 
-    public void update(Vector3f goToPos, Camera cam){
+    public void update(Vector3f goToPos, Camera cam,float Delta){
         mesh.lookAt(goToPos);
+        if(!mesh.CloseEnough(goToPos)) mesh.MoveToAngle(goToPos,0.005f,Delta/100);
         mesh.Draw(cam);
     }
 

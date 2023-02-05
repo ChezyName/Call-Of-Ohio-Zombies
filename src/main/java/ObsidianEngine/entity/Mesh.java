@@ -230,18 +230,32 @@ public class Mesh {
         }
     }
 
-    public void lookAt(Vector3f otherPosition){
-        float x1 = getPosition().x;
-        float x2 = otherPosition.x;
-        float y1 = getPosition().z;
-        float y2 = otherPosition.z;
+    public void lookAt(Vector3f OP){
+        Vector3f otherPosition = new Vector3f(OP);
+        Vector3f direction = otherPosition.sub(Position);
+        direction = direction.normalize();
 
-        double dot = x1 * x2 + y1 * y2;
-        double det = x1 * y2 - y1 * x2;
-        double angle = Math.atan2(det, dot);
-        if (angle < 0) {
-            angle += 2 * Math.PI;
+        float angle = (float) Math.atan2(direction.x, direction.z);
+        float yRotation = (float) Math.toDegrees(angle);
+        if (yRotation < 0) {
+            yRotation += 360;
         }
-        setRotation(0,(float)-Math.toDegrees(angle), 0);
+        yRotation -= 90;
+        setRotation(0,yRotation,0);
+    }
+
+    public void MoveToAngle(Vector3f OtherPosition,float Speed,float Delta){
+        Vector3f otherPosition = new Vector3f(OtherPosition);
+        float speed = Speed;
+
+        Vector3f direction = otherPosition.sub(Position);
+        direction = direction.normalize();
+
+        Position = Position.add(direction.mul(speed * Delta));
+    }
+
+    public boolean CloseEnough(Vector3f otherPosition){
+        float Dist = Position.distance(otherPosition);
+        return Dist < 30;
     }
 }

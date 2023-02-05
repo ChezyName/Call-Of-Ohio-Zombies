@@ -133,34 +133,37 @@ public class Window {
         MouseUtils.SetCursorImage(GLFWWindow,"/imgs/Crosshair.png");
 
         //Starting Meshes & Models
-        //Load Map
-        //Map.getMap(550,50,MapPieces,cam,GLFWWindow,(title + " " + versionNumber));
+        //Load Map [MULTI-SPRTIE]
+        Map.getMap(550,50,MapPieces,cam,GLFWWindow,(title + " " + versionNumber));
+
+        /* SINGLE COLOR MAP
         Mesh map = new Plane(15000,15000,new Vector3f(0,0,0));
         map.setShader(Shader.defaultTextureShader);
         map.setTexture(new Texture("/imgs/Grass.jpg",false));
         MapPieces.add(map);
+         */
 
         Player = FileUtils.LoadOBJWTextureSingle("/models/Link.obj", new Texture("/imgs/PlayerTexture.png"));
         Player.setPosition(-30,0,0);
         Player.setScale(50);
 
-        Zombies.add(new Zombie(Player.getPosition(),25));
+        Zombies.add(new Zombie(Player.getPosition(),150));
     }
 
-    private void updateZombies(){
+    private void updateZombies(float Delta){
         for(Zombie z : Zombies){
-            z.update(Player.getPosition(),cam);
+            z.update(Player.getPosition(),cam,Delta);
         }
     }
 
-    private void drawAllMeshes(){
+    private void drawAllMeshes(float Delta){
         Player.Draw(cam);
 
         for(Mesh m : MapPieces){
             m.Draw(cam);
         }
 
-        updateZombies();
+        updateZombies(Delta);
     }
 
     long lastTime = System.nanoTime();
@@ -195,13 +198,12 @@ public class Window {
             glPushMatrix();
 
             //Render Objects
-            drawAllMeshes();
+            drawAllMeshes(pDelta);
 
             glPopMatrix();
             GLFW.glfwSwapBuffers(GLFWWindow);
 
-            GLFW.glfwSetWindowTitle(GLFWWindow, title + " | FPS: " + deltaTime);
-            //FPSCalc();
+            FPSCalc();
         }
 
         //Cleanup
