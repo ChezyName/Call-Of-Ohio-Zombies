@@ -106,7 +106,7 @@ public class Window {
 
         //Create OPENGL Renderer
         GLFW.glfwMakeContextCurrent(GLFWWindow);
-        GLFW.glfwSwapInterval(0);
+        GLFW.glfwSwapInterval(1);
 
         //Display Window
         GLFW.glfwShowWindow(GLFWWindow);
@@ -134,7 +134,11 @@ public class Window {
 
         //Starting Meshes & Models
         //Load Map
-        Map.getMap(550,50,MapPieces,cam,GLFWWindow,(title + " " + versionNumber));
+        //Map.getMap(550,50,MapPieces,cam,GLFWWindow,(title + " " + versionNumber));
+        Mesh map = new Plane(15000,15000,new Vector3f(0,0,0));
+        map.setShader(Shader.defaultTextureShader);
+        map.setTexture(new Texture("/imgs/Grass.jpg",false));
+        MapPieces.add(map);
 
         Player = FileUtils.LoadOBJWTextureSingle("/models/Link.obj", new Texture("/imgs/PlayerTexture.png"));
         Player.setPosition(-30,0,0);
@@ -159,6 +163,14 @@ public class Window {
         updateZombies();
     }
 
+    long lastTime = System.nanoTime();
+    private float getDelta(){
+        long currentTime = System.nanoTime();
+        int delta = (int)(currentTime - lastTime);
+        lastTime = System.nanoTime();
+        return delta;
+    }
+
     private void loop() {
         glClearColor(0,0,0,1);
 
@@ -166,10 +178,10 @@ public class Window {
             //Get Events
             GLFW.glfwPollEvents();
             //Controls
-            float deltaTime = time.getDelta();
-            float pDelta = (deltaTime/50);
+            float deltaTime = getDelta();
+            float pDelta = (deltaTime/500);
             if(Input.getKeyDown(GLFW_KEY_W)) Player.Translate(0,0,-(0.01f)*pDelta);
-            if(Input.getKeyDown(GLFW_KEY_S)) Player.Translate(0,0,(0.1f)*pDelta);
+            if(Input.getKeyDown(GLFW_KEY_S)) Player.Translate(0,0,(0.01f)*pDelta);
             if(Input.getKeyDown(GLFW_KEY_A)) Player.Translate(-(0.01f)*pDelta,0,0);
             if(Input.getKeyDown(GLFW_KEY_D)) Player.Translate((0.01f)*pDelta,0,0);
 
@@ -187,7 +199,9 @@ public class Window {
 
             glPopMatrix();
             GLFW.glfwSwapBuffers(GLFWWindow);
-            FPSCalc();
+
+            GLFW.glfwSetWindowTitle(GLFWWindow, title + " | FPS: " + deltaTime);
+            //FPSCalc();
         }
 
         //Cleanup

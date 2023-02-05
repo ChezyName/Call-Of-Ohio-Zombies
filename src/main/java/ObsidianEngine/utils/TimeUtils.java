@@ -31,15 +31,10 @@ public class TimeUtils {
 
     public float getDelta(){
         float currentTime = System.currentTimeMillis();
-        float deltaTime = ( currentTime - lastTime ) / 1000.0f;
-        //Lower Limit = Keep Below 60fps (DELTA TIME)
-        if ( deltaTime < 0.0167f )
-            deltaTime = 0.0167f;
-        //Keep Delta Above 10fps
-        else if ( deltaTime > 0.1f )
-            deltaTime = 0.1f;
-
-        lastTime = getTime();
+        float delta = currentTime - lastTime;
+        lastTime = currentTime;
+        float deltaTime = (1000/delta);
+        System.out.println(deltaTime);
         return deltaTime;
     }
 }
