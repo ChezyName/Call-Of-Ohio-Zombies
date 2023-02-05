@@ -42,7 +42,7 @@ public class Window {
     private Camera cam;
     private Mesh Player;
 
-    private ArrayList<Mesh> Meshes = new ArrayList<Mesh>();
+    private ArrayList<Mesh> MapPieces = new ArrayList<Mesh>();
     private ArrayList<Zombie> Zombies = new ArrayList<Zombie>();
     //CALLBACKS
 
@@ -134,13 +134,13 @@ public class Window {
 
         //Starting Meshes & Models
         //Load Map
-        Map.getMap(550,50,Meshes,cam,GLFWWindow,(title + " " + versionNumber));
+        Map.getMap(550,50,MapPieces,cam,GLFWWindow,(title + " " + versionNumber));
 
-        Player = FileUtils.LoadOBJWTexture("/models/Link.obj", Meshes, new Texture("/imgs/PlayerTexture.png"));
+        Player = FileUtils.LoadOBJWTextureSingle("/models/Link.obj", new Texture("/imgs/PlayerTexture.png"));
         Player.setPosition(-30,0,0);
         Player.setScale(50);
 
-        Zombies.add(new Zombie(Player.getPosition(),1));
+        Zombies.add(new Zombie(Player.getPosition(),25));
     }
 
     private void updateZombies(){
@@ -150,9 +150,12 @@ public class Window {
     }
 
     private void drawAllMeshes(){
-        for(Mesh m : Meshes){
+        Player.Draw(cam);
+
+        for(Mesh m : MapPieces){
             m.Draw(cam);
         }
+
         updateZombies();
     }
 

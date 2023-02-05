@@ -21,7 +21,7 @@ public class Zombie {
 
         float X = (StartPosiition.x) + (MathUtils.getRandomNumber() * (Radius/2));
         float Y = (StartPosiition.y) + (MathUtils.getRandomNumber() * (Radius/2));
-        Zombie.setPosition(X,0,Y);
+        Zombie.setPosition(50,0,0);
     }
 
     public void update(Vector3f goToPos, Camera cam){

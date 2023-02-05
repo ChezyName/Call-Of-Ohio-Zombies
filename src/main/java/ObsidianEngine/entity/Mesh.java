@@ -6,6 +6,8 @@ import ObsidianEngine.render.Shader;
 import ObsidianEngine.render.Texture;
 import ObsidianEngine.utils.MathUtils;
 import org.joml.Matrix4f;
+import org.joml.Quaternionf;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.system.MathUtil;
@@ -229,18 +231,17 @@ public class Mesh {
     }
 
     public void lookAt(Vector3f otherPosition){
-        float y = this.getPosition().y - otherPosition.y;
-        float x = this.getPosition().x - otherPosition.x;
+        float x1 = getPosition().x;
+        float x2 = otherPosition.x;
+        float y1 = getPosition().z;
+        float y2 = otherPosition.z;
 
-        //Calculate Rotation Angle
-        float angle = (float) Math.toDegrees(Math.atan2(y, x));
-
+        double dot = x1 * x2 + y1 * y2;
+        double det = x1 * y2 - y1 * x2;
+        double angle = Math.atan2(det, dot);
         if (angle < 0) {
-            angle += 360;
+            angle += 2 * Math.PI;
         }
-
-        System.out.println("Char Angle: [" + angle + "]");
-
-        this.setRotation(0,angle,0);
+        setRotation(0,(float)-Math.toDegrees(angle), 0);
     }
 }
