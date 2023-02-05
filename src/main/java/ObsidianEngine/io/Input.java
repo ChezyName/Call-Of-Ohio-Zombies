@@ -7,6 +7,8 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
 
+import java.nio.FloatBuffer;
+
 public class Input {
     private static boolean[] keys = new boolean[GLFW.GLFW_KEY_LAST];
     private static boolean[] buttons = new boolean[GLFW.GLFW_MOUSE_BUTTON_LAST];
@@ -49,6 +51,11 @@ public class Input {
         glfwSetCursorPosCallback(Window,mouseMove);
         glfwSetMouseButtonCallback(Window,mouseButtons);
         glfwSetScrollCallback(Window,mouseScroll);
+    }
+
+    //Working on Controller Support [MAYBE]
+    public static boolean JoystickExists(){
+        return glfwJoystickPresent(GLFW_JOYSTICK_1);
     }
 
     public static boolean getKeyDown(int key) {

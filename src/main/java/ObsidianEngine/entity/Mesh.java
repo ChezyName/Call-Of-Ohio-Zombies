@@ -1,11 +1,13 @@
 package ObsidianEngine.entity;
 
+import ObsidianEngine.io.Input;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
 import ObsidianEngine.render.Texture;
 import ObsidianEngine.utils.MathUtils;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.system.MathUtil;
 import org.lwjgl.system.MemoryUtil;
 
@@ -13,6 +15,7 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.Vector;
 
+import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL30.*;
@@ -223,5 +226,21 @@ public class Mesh {
             glBufferData(GL_ARRAY_BUFFER, UVBuffer, GL_STATIC_DRAW);
             glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
         }
+    }
+
+    public void lookAt(Vector3f otherPosition){
+        float y = this.getPosition().y - otherPosition.y;
+        float x = this.getPosition().x - otherPosition.x;
+
+        //Calculate Rotation Angle
+        float angle = (float) Math.toDegrees(Math.atan2(y, x));
+
+        if (angle < 0) {
+            angle += 360;
+        }
+
+        System.out.println("Char Angle: [" + angle + "]");
+
+        this.setRotation(0,angle,0);
     }
 }

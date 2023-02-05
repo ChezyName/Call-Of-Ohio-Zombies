@@ -1,6 +1,7 @@
 package ObsidianEngine.io;
 
 import Game.Map;
+import Game.Zombie;
 import ObsidianEngine.entity.Box;
 import ObsidianEngine.entity.Mesh;
 import ObsidianEngine.entity.Plane;
@@ -32,6 +33,7 @@ import java.util.Vector;
 public class Window {
     private int width, height;
     private String title,versionNumber;
+    private static long FPStime;
     private long GLFWWindow;
     private TimeUtils time;
     private Input inputsystem;
@@ -41,6 +43,7 @@ public class Window {
     private Mesh Player;
 
     private ArrayList<Mesh> Meshes = new ArrayList<Mesh>();
+    private ArrayList<Zombie> Zombies = new ArrayList<Zombie>();
     //CALLBACKS
 
     private Window(){
@@ -62,9 +65,18 @@ public class Window {
         loop();
     }
 
+    private void FPSCalc() {
+        float TimeBetween = System.currentTimeMillis() - FPStime;
+
+        int FPS = (int) (1000 / TimeBetween);
+        GLFW.glfwSetWindowTitle(GLFWWindow, title + " | FPS: " + FPS);
+        FPStime = System.currentTimeMillis();
+    }
+
     private void init(){
         //Core Systems
         time = TimeUtils.getTimeUtils();
+        FPStime = System.currentTimeMillis();
         cam = new Camera(-30,400f,0f);
 
 
@@ -94,7 +106,7 @@ public class Window {
 
         //Create OPENGL Renderer
         GLFW.glfwMakeContextCurrent(GLFWWindow);
-        GLFW.glfwSwapInterval(1);
+        GLFW.glfwSwapInterval(0);
 
         //Display Window
         GLFW.glfwShowWindow(GLFWWindow);
@@ -122,17 +134,26 @@ public class Window {
 
         //Starting Meshes & Models
         //Load Map
-        Map.getMap(550,50,Meshes,cam,GLFWWindow);
+        Map.getMap(550,50,Meshes,cam,GLFWWindow,(title + " " + versionNumber));
 
         Player = FileUtils.LoadOBJWTexture("/models/Link.obj", Meshes, new Texture("/imgs/PlayerTexture.png"));
         Player.setPosition(-30,0,0);
         Player.setScale(50);
+
+        Zombies.add(new Zombie(Player.getPosition(),1));
+    }
+
+    private void updateZombies(){
+        for(Zombie z : Zombies){
+            z.update(Player.getPosition(),cam);
+        }
     }
 
     private void drawAllMeshes(){
         for(Mesh m : Meshes){
             m.Draw(cam);
         }
+        updateZombies();
     }
 
     private void loop() {
@@ -141,9 +162,6 @@ public class Window {
         while (!GLFW.glfwWindowShouldClose(GLFWWindow)) {
             //Get Events
             GLFW.glfwPollEvents();
-
-            GLFW.glfwSetWindowTitle(GLFWWindow,title + " " + versionNumber + " | " + time.getFPS() + " FPS");
-
             //Controls
             float deltaTime = time.getDelta();
             float pDelta = (deltaTime/50);
@@ -166,6 +184,7 @@ public class Window {
 
             glPopMatrix();
             GLFW.glfwSwapBuffers(GLFWWindow);
+            FPSCalc();
         }
 
         //Cleanup

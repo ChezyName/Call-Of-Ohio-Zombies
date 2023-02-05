@@ -12,8 +12,12 @@
     <list default="true" id="5b516d30-da46-4da6-a7bf-c00ec8a86d27" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Mesh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Input.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/render/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/render/Texture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/FileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/MathUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/MathUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/TimeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/TimeUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,29 +75,30 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/mineb/IdeaProjects/Winter2023GameJam/out/artifacts/Winter2023GameJam_jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mineb/IdeaProjects/Winter2023GameJam/out/artifacts/Winter2023GameJam_jar/imgs&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar" />
+      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar\imgs" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar\models" />
+      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\resources\models" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\resources\imgs" />
-      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar\imgs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\resources\models" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\resources\imgs" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar\models" />
-      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\resources\models" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\production\resources" />
     </key>
@@ -171,6 +176,14 @@
       <workItem from="1675474171177" duration="3368000" />
       <workItem from="1675489479005" duration="467000" />
       <workItem from="1675489998330" duration="142000" />
+      <workItem from="1675490455563" duration="31000" />
+      <workItem from="1675490579269" duration="310000" />
+      <workItem from="1675491019807" duration="1331000" />
+      <workItem from="1675492537900" duration="20000" />
+      <workItem from="1675542977111" duration="1846000" />
+      <workItem from="1675554589328" duration="914000" />
+      <workItem from="1675556038008" duration="343000" />
+      <workItem from="1675556492308" duration="3784000" />
     </task>
     <servers />
   </component>

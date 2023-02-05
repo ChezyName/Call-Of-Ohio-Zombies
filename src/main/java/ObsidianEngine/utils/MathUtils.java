@@ -4,6 +4,8 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector3fc;
 
+import java.util.Random;
+
 public class MathUtils {
     public static Matrix4f createTransformationMatrix(Vector3f pos, float rx, float ry, float rz, float scale){
         Matrix4f m = new Matrix4f();
@@ -16,7 +18,8 @@ public class MathUtils {
         return m;
     }
 
-    public static void getForwardVector(Vector3f Position, float angleForward){
-
+    public static float getRandomNumber(){
+        Random random = new Random();
+        return (float)(random.nextDouble() * 2 - 1);
     }
 }

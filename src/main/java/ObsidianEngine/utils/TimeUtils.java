@@ -6,10 +6,12 @@ import static org.lwjgl.glfw.GLFW.glfwGetTime;
 
 public class TimeUtils {
     private float lastTime;
+    private float lastTimeFPS;
     private static TimeUtils TimeUtilityClass = null;
 
     public TimeUtils(){
         lastTime = getTime();
+        lastTimeFPS = getTime();
     }
     public static TimeUtils getTimeUtils(){
         if(TimeUtilityClass == null) TimeUtilityClass = new TimeUtils();
@@ -21,9 +23,10 @@ public class TimeUtils {
     }
 
     public int getFPS(){
-        float TimePassed = (System.currentTimeMillis()/lastTime);
-        lastTime = System.currentTimeMillis();
-        return (int)(1000/TimePassed);
+        float TimePassed = (System.currentTimeMillis() - lastTimeFPS);
+        lastTimeFPS = getTime();
+        int fps = (int)(1000/TimePassed);
+        return fps;
     }
 
     public float getDelta(){
@@ -36,7 +39,7 @@ public class TimeUtils {
         else if ( deltaTime > 0.1f )
             deltaTime = 0.1f;
 
-        lastTime = currentTime;
+        lastTime = getTime();
         return deltaTime;
     }
 }
