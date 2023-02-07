@@ -1,6 +1,7 @@
 package ObsidianEngine.io;
 
 import Game.Map;
+import Game.Player;
 import Game.Zombie;
 import ObsidianEngine.entity.Box;
 import ObsidianEngine.entity.Mesh;
@@ -8,6 +9,7 @@ import ObsidianEngine.entity.Plane;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
 import ObsidianEngine.render.Texture;
+import ObsidianEngine.ui.Text;
 import ObsidianEngine.utils.ColorUtils;
 import ObsidianEngine.utils.FileUtils;
 import ObsidianEngine.utils.MouseUtils;
@@ -36,11 +38,11 @@ public class Window {
     private static long FPStime;
     private long GLFWWindow;
     private TimeUtils time;
-    private Input inputsystem;
+    private Input inputSystem;
 
     private static Window window = null;
     private Camera cam;
-    private Mesh Player;
+    private Game.Player Player;
 
     private ArrayList<Mesh> MapPieces = new ArrayList<Mesh>();
     private ArrayList<Zombie> Zombies = new ArrayList<Zombie>();
@@ -123,7 +125,8 @@ public class Window {
         glfwSetWindowAspectRatio(GLFWWindow,16,9);
 
         //Post Window Init CoreSystems
-        inputsystem = new Input(GLFWWindow);
+        inputSystem = new Input(GLFWWindow);
+
         //Post OpenGL Init
         //Init Default Shader
         Shader.defaultShader = new Shader("/shaders/mainVertex.glsl","/shaders/mainFragment.glsl");
@@ -143,16 +146,18 @@ public class Window {
         MapPieces.add(map);
          */
 
-        Player = FileUtils.LoadOBJWTextureSingle("/models/Link.obj", new Texture("/imgs/PlayerTexture.png"));
-        Player.setPosition(-30,0,0);
-        Player.setScale(50);
+        Player = new Player(FileUtils.LoadOBJWTextureSingle("/models/Link.obj", new Texture("/imgs/PlayerTexture.png")));
 
-        Zombies.add(new Zombie(Player.getPosition(),150));
+        Zombies.add(new Zombie(Player.getPosition(),350));
+        Zombies.add(new Zombie(Player.getPosition(),350));
+        Zombies.add(new Zombie(Player.getPosition(),350));
+        Zombies.add(new Zombie(Player.getPosition(),350));
+        Zombies.add(new Zombie(Player.getPosition(),350));
     }
 
     private void updateZombies(float Delta){
         for(Zombie z : Zombies){
-            z.update(Player.getPosition(),cam,Delta);
+            z.update(Player,cam,Delta);
         }
     }
 
@@ -183,10 +188,11 @@ public class Window {
             //Controls
             float deltaTime = getDelta();
             float pDelta = (deltaTime/500);
-            if(Input.getKeyDown(GLFW_KEY_W)) Player.Translate(0,0,-(0.01f)*pDelta);
-            if(Input.getKeyDown(GLFW_KEY_S)) Player.Translate(0,0,(0.01f)*pDelta);
-            if(Input.getKeyDown(GLFW_KEY_A)) Player.Translate(-(0.01f)*pDelta,0,0);
-            if(Input.getKeyDown(GLFW_KEY_D)) Player.Translate((0.01f)*pDelta,0,0);
+
+            if(Input.getKeyDown(GLFW_KEY_W)) Player.setPosition(0,0,-(0.05f)*pDelta);
+            if(Input.getKeyDown(GLFW_KEY_S)) Player.setPosition(0,0,(0.05f)*pDelta);
+            if(Input.getKeyDown(GLFW_KEY_A)) Player.setPosition(-(0.05f)*pDelta,0,0);
+            if(Input.getKeyDown(GLFW_KEY_D)) Player.setPosition((0.05f)*pDelta,0,0);
 
             Player.setRotation(0,MouseUtils.getMouseRotFromCenter(GLFWWindow),0);
 
@@ -200,6 +206,9 @@ public class Window {
             //Render Objects
             drawAllMeshes(pDelta);
 
+            //Render UI
+
+
             glPopMatrix();
             GLFW.glfwSwapBuffers(GLFWWindow);
 
@@ -207,7 +216,7 @@ public class Window {
         }
 
         //Cleanup
-        inputsystem.destroy(GLFWWindow);
+        inputSystem.destroy(GLFWWindow);
         GLFW.glfwDestroyWindow(GLFWWindow);
     }
 }

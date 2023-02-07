@@ -9,24 +9,29 @@ import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Vector;
 
 public class Zombie {
     private Mesh mesh;
 
     public Zombie(Vector3f StartPosiition, float Radius){
         Mesh Zombie = FileUtils.LoadOBJWTextureSingle("/models/Zombie.obj", new Texture("/imgs/ZombieTexture.png"));
-        Zombie.setPosition(-60,0,0);
         Zombie.setScale(50);
         this.mesh = Zombie;
 
-        float X = (StartPosiition.x) + (MathUtils.getRandomNumber() * (Radius/2));
-        float Y = (StartPosiition.y) + (MathUtils.getRandomNumber() * (Radius/2));
-        Zombie.setPosition(350,0,0);
+        float X = (StartPosiition.x) + (MathUtils.getRandomPosNeg() * (Radius));
+        float Y = (StartPosiition.y) + (MathUtils.getRandomPosNeg() * (Radius));
+        Zombie.setPosition(X,0,Y);
     }
 
-    public void update(Vector3f goToPos, Camera cam,float Delta){
+
+    public void update(Player p, Camera cam,float Delta){
+        Vector3f goToPos = p.getPosition();
         mesh.lookAt(goToPos);
         if(!mesh.CloseEnough(goToPos)) mesh.MoveToAngle(goToPos,0.005f,Delta/100);
+        else{
+            //Too Close Deal Damage
+        }
         mesh.Draw(cam);
     }
 

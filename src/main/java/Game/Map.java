@@ -5,6 +5,7 @@ import ObsidianEngine.entity.Plane;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
 import ObsidianEngine.render.Texture;
+import ObsidianEngine.ui.Text;
 import ObsidianEngine.utils.ColorUtils;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -21,12 +22,14 @@ public class Map {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glPushMatrix();
 
-        GLFW.glfwSetWindowTitle(GLFWWindow,title + " | Loading Map: " + n + "/" + max);
+        int percentage = (int)(((float) n/ (float) max)*100);
+        GLFW.glfwSetWindowTitle(GLFWWindow,title + " | Loading Map: " + n + "/" + max + " [" + percentage + "%]");
 
         //Render Objects
         for(Mesh m : Meshes){
             m.Draw(cam);
         }
+        Text.getText().drawString(Text.getText(),"TEST",0,0);
 
         glPopMatrix();
         GLFW.glfwSwapBuffers(GLFWWindow);
@@ -43,7 +46,7 @@ public class Map {
                 Ground.Create();
                 Meshes.add(Ground);
 
-                System.out.println("Map Space @ " + startPos.x + "," + startPos.y);
+                //System.out.println("Map Space @ " + startPos.x + "," + startPos.y);
 
                 startPos.x += incerment;
             }
@@ -68,7 +71,7 @@ public class Map {
                 Ground.Create();
                 Meshes.add(Ground);
 
-                System.out.println("[BUILDING MAP]" + currentPiece + "/" + maxPieces);
+                //System.out.println("[BUILDING MAP]" + currentPiece + "/" + maxPieces);
                 currentPiece++;
 
                 startPos.x += incerment;

@@ -59,4 +59,7 @@ dependencies {
     runtimeOnly "org.lwjgl:lwjgl-opengl::$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl-stb::$lwjglNatives"
     implementation "org.joml:joml:${jomlVersion}"
+
+    // https://mvnrepository.com/artifact/org.slick2d/slick2d-core
+    implementation 'org.slick2d:slick2d-core:1.0.0'
 }

@@ -22,4 +22,10 @@ public class MathUtils {
         Random random = new Random();
         return (float)(random.nextDouble() * 2 - 1);
     }
+
+    public static int getRandomPosNeg(){
+        float PN = getRandomNumber();
+        if(PN > 0) return 1;
+        else return -1;
+    }
 }

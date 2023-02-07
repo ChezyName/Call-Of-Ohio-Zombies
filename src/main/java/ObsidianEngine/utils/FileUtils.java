@@ -4,15 +4,24 @@ import ObsidianEngine.entity.Mesh;
 import ObsidianEngine.render.Shader;
 import ObsidianEngine.render.Texture;
 import org.joml.Vector3f;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.assimp.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import static org.lwjgl.BufferUtils.createByteBuffer;
+import static org.lwjgl.system.MemoryUtil.memSlice;
 
 public class FileUtils {
     public static String loadAsString(String path){
@@ -29,6 +38,16 @@ public class FileUtils {
         }
 
         return File.toString();
+    }
+
+    public static ByteBuffer loadFileToByteBuffer(File file) throws IOException {
+        ByteBuffer buffer;
+        try (FileInputStream fis = new FileInputStream(file);
+             FileChannel fc = fis.getChannel();)
+        {
+            buffer = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+        }
+        return buffer;
     }
 
     public static String getFileNameResource(String path){
