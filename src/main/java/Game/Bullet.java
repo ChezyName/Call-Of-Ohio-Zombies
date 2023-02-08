@@ -30,10 +30,10 @@ public class Bullet {
             double x = Math.cos(radians);
             double y = Math.sin(radians);
             Vector2f forward = new Vector2f((float) x,(float) y);
-            forward.x *= Delta/500 * 0.05;
-            forward.y *= Delta/500 * 0.05;
+            forward.x *= Delta/100 * 0.05;
+            forward.y *= Delta/100 * 0.05;
 
-            //m.Translate(forward.x,0,forward.y);
+            m.Translate(forward.x,0,-forward.y);
 
             //Draw the bullet
             m.Draw(camera);
