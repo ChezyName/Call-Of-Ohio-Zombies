@@ -14,6 +14,10 @@ public class Player {
         this.mesh.setScale(50);
     }
 
+    public float getRotation(){
+        return mesh.getRotation().y;
+    }
+
     public void resetHealth(){
         Health = 100;
     }

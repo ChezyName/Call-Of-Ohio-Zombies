@@ -19,8 +19,8 @@ public class Zombie {
         Zombie.setScale(50);
         this.mesh = Zombie;
 
-        float X = (StartPosiition.x) + (MathUtils.getRandomPosNeg() * (Radius));
-        float Y = (StartPosiition.y) + (MathUtils.getRandomPosNeg() * (Radius));
+        float X = (StartPosiition.x) + (MathUtils.getRandomNumber() * (Radius/2));
+        float Y = (StartPosiition.y) + (MathUtils.getRandomNumber() * (Radius/2));
         Zombie.setPosition(X,0,Y);
     }
 

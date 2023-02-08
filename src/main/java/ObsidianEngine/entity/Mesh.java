@@ -45,6 +45,10 @@ public class Mesh {
         this.Create();
     }
 
+    public Vector3f getRotation() {
+        return Rotation;
+    }
+
     public Mesh(Vector3f[] vertices, int[] indices, Shader shader, Vector3f Color, float[] UV){
         this.vertices = vertices;
         this.indices = indices;

@@ -1,5 +1,6 @@
 package ObsidianEngine.io;
 
+import Game.Bullet;
 import Game.Map;
 import Game.Player;
 import Game.Zombie;
@@ -12,6 +13,7 @@ import ObsidianEngine.utils.ColorUtils;
 import ObsidianEngine.utils.FileUtils;
 import ObsidianEngine.utils.MouseUtils;
 import ObsidianEngine.utils.TimeUtils;
+import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFW;
@@ -40,7 +42,7 @@ public class Window {
 
     private ArrayList<Mesh> MapPieces = new ArrayList<Mesh>();
     private ArrayList<Zombie> Zombies = new ArrayList<Zombie>();
-    //CALLBACKS
+    private ArrayList<Bullet> Bullets = new ArrayList<Bullet>();
 
     private Window(){
         this.width = 1280;
@@ -141,26 +143,34 @@ public class Window {
          */
 
         Player = new Player(FileUtils.LoadOBJWTextureSingle("/models/Link.obj", new Texture("/imgs/PlayerTexture.png")));
-
-        Zombies.add(new Zombie(Player.getPosition(),350));
-        Zombies.add(new Zombie(Player.getPosition(),350));
-        Zombies.add(new Zombie(Player.getPosition(),350));
-        Zombies.add(new Zombie(Player.getPosition(),350));
-        Zombies.add(new Zombie(Player.getPosition(),350));
     }
 
-    private long LastTimeZombiesSpawn = System.nanoTime();
+    private int Wave = 0;
     private void Reset(){
         for(int i = 0; i < Zombies.size(); i++){
             Zombie z = Zombies.get(i);
             z.Destroy();
             Zombies.remove(i);
         }
+
+        for(int i = 0; i < Bullets.size(); i++){
+            Bullet z = Bullets.get(i);
+            z.Destroy();
+            Bullets.remove(i);
+        }
+
         Player.resetHealth();
-        LastTimeZombiesSpawn = System.nanoTime();
+        Wave = 0;
         //Player.setPosition(0,0,0);
     }
 
+    private void updateBullets(float Delta){
+        for(int i = 0; i < Bullets.size(); i++){
+            Bullet b = Bullets.get(i);
+            b.Update(cam,Delta);
+            if(b.Dead()) Bullets.remove(i);
+        }
+    }
 
     private void updateZombies(float Delta){
         for(Zombie z : Zombies){
@@ -168,10 +178,13 @@ public class Window {
         }
 
         //To Seconds
-        long TimeB = (System.nanoTime() - LastTimeZombiesSpawn);
-        long TimeF = TimeUnit.SECONDS.convert(TimeB,TimeUnit.NANOSECONDS);
-
-        System.out.println(TimeF);
+        if(Zombies.size() <= 0){
+            //All Zombies Dead / Game Reset
+            Wave += 1;
+            for(int i = 0; i < Wave; i++){
+                Zombies.add(new Zombie(Player.getPosition(),350));
+            }
+        }
     }
 
     private void drawAllMeshes(float Delta){
@@ -181,6 +194,7 @@ public class Window {
             m.Draw(cam);
         }
 
+        updateBullets(Delta);
         updateZombies(Delta);
     }
 
@@ -206,7 +220,6 @@ public class Window {
 
     private void loop() {
         glClearColor(0,0,0,1);
-        LastTimeZombiesSpawn = System.nanoTime();
 
         while (!GLFW.glfwWindowShouldClose(GLFWWindow)) {
             if(Player.getHealth() <= 0) Reset();
@@ -221,6 +234,8 @@ public class Window {
             if(Input.getKeyDown(GLFW_KEY_S)) Player.setPosition(0,0,(0.05f)*pDelta);
             if(Input.getKeyDown(GLFW_KEY_A)) Player.setPosition(-(0.05f)*pDelta,0,0);
             if(Input.getKeyDown(GLFW_KEY_D)) Player.setPosition((0.05f)*pDelta,0,0);
+
+            if(Input.isMouseButtonDown(0)) Bullets.add(new Bullet(new Vector3f(cam.getPosition().x,0,cam.getPosition().z),Player.getRotation()));
 
             Player.setRotation(0,MouseUtils.getMouseRotFromCenter(GLFWWindow),0);
 
