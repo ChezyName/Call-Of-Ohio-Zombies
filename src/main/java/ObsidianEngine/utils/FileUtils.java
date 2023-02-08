@@ -40,7 +40,9 @@ public class FileUtils {
         return File.toString();
     }
 
-    public static ByteBuffer loadFileToByteBuffer(File file) throws IOException {
+    public static ByteBuffer loadFileToByteBuffer(String path) throws IOException {
+        File file = new File(getJarLoc() + path);
+        System.err.println(getJarLoc() + path);
         ByteBuffer buffer;
         try (FileInputStream fis = new FileInputStream(file);
              FileChannel fc = fis.getChannel();)

@@ -14,6 +14,10 @@ public class Player {
         this.mesh.setScale(50);
     }
 
+    public void resetHealth(){
+        Health = 100;
+    }
+
     public void setPosition(float x,float y, float z){
         mesh.Translate(x,y,z);
     }

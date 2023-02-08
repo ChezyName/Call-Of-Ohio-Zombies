@@ -5,14 +5,17 @@ import ObsidianEngine.entity.Plane;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
 import ObsidianEngine.render.Texture;
-import ObsidianEngine.ui.Text;
+import ObsidianEngine.ui.UIRenderer;
 import ObsidianEngine.utils.ColorUtils;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFW;
 
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 
+import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Map {
@@ -29,7 +32,15 @@ public class Map {
         for(Mesh m : Meshes){
             m.Draw(cam);
         }
-        Text.getText().drawString(Text.getText(),"TEST",0,0);
+
+        IntBuffer widthBuffer = BufferUtils.createIntBuffer(1);
+        IntBuffer heightBuffer = BufferUtils.createIntBuffer(1);
+
+        glfwGetWindowSize(GLFWWindow,widthBuffer,heightBuffer);
+
+        //RenderUI
+        float Half = widthBuffer.get(0)/2;
+        UIRenderer.DrawProgressBar(GLFWWindow,(float)(Half - (Half*0.8)) ,(float) (heightBuffer.get(0)*0.9),((float) n/ (float) max),(float) (heightBuffer.get(0)*0.05),(float) (Half*1.6),ColorUtils.White);
 
         glPopMatrix();
         GLFW.glfwSwapBuffers(GLFWWindow);

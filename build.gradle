@@ -7,6 +7,10 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
+
+    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+    maven { url "https://raw.github.com/SpinyOwl/repo/releases" }
 }
 
 dependencies {
@@ -22,6 +26,9 @@ import org.gradle.internal.os.OperatingSystem
 
 project.ext.lwjglVersion = "3.3.1"
 project.ext.jomlVersion = "1.10.5"
+def legui_version = "3.3.1"
+def le_cbchain = '1.0.0'
+def le_util = '1.0.0'
 
 switch (OperatingSystem.current()) {
     case OperatingSystem.LINUX:
@@ -44,6 +51,9 @@ switch (OperatingSystem.current()) {
 dependencies {
     implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
 
+    // LEGUI - https://github.com/SpinyOwl/legui
+    implementation group: 'com.spinyowl', name: 'legui', version: "${legui_version}";
+
     implementation "org.lwjgl:lwjgl"
     implementation "org.lwjgl:lwjgl-assimp"
     implementation "org.lwjgl:lwjgl-glfw"
@@ -59,7 +69,5 @@ dependencies {
     runtimeOnly "org.lwjgl:lwjgl-opengl::$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl-stb::$lwjglNatives"
     implementation "org.joml:joml:${jomlVersion}"
-
-    // https://mvnrepository.com/artifact/org.slick2d/slick2d-core
-    implementation 'org.slick2d:slick2d-core:1.0.0'
+    implementation 'org.lwjgl:lwjgl-utils:3.2.3'
 }

@@ -3,34 +3,28 @@ package ObsidianEngine.io;
 import Game.Map;
 import Game.Player;
 import Game.Zombie;
-import ObsidianEngine.entity.Box;
 import ObsidianEngine.entity.Mesh;
-import ObsidianEngine.entity.Plane;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
 import ObsidianEngine.render.Texture;
-import ObsidianEngine.ui.Text;
+import ObsidianEngine.ui.UIRenderer;
 import ObsidianEngine.utils.ColorUtils;
 import ObsidianEngine.utils.FileUtils;
 import ObsidianEngine.utils.MouseUtils;
 import ObsidianEngine.utils.TimeUtils;
-import org.joml.Vector2f;
-import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFW;
 import static  org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWWindowSizeCallbackI;
 import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.system.MemoryUtil;
 
-import java.nio.DoubleBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.concurrent.TimeUnit;
 
 public class Window {
     private int width, height;
@@ -155,10 +149,29 @@ public class Window {
         Zombies.add(new Zombie(Player.getPosition(),350));
     }
 
+    private long LastTimeZombiesSpawn = System.nanoTime();
+    private void Reset(){
+        for(int i = 0; i < Zombies.size(); i++){
+            Zombie z = Zombies.get(i);
+            z.Destroy();
+            Zombies.remove(i);
+        }
+        Player.resetHealth();
+        LastTimeZombiesSpawn = System.nanoTime();
+        //Player.setPosition(0,0,0);
+    }
+
+
     private void updateZombies(float Delta){
         for(Zombie z : Zombies){
             z.update(Player,cam,Delta);
         }
+
+        //To Seconds
+        long TimeB = (System.nanoTime() - LastTimeZombiesSpawn);
+        long TimeF = TimeUnit.SECONDS.convert(TimeB,TimeUnit.NANOSECONDS);
+
+        System.out.println(TimeF);
     }
 
     private void drawAllMeshes(float Delta){
@@ -179,10 +192,25 @@ public class Window {
         return delta;
     }
 
+    private void RenderUI(){
+        IntBuffer widthBuffer = BufferUtils.createIntBuffer(1);
+        IntBuffer heightBuffer = BufferUtils.createIntBuffer(1);
+
+        glfwGetWindowSize(GLFWWindow,widthBuffer,heightBuffer);
+
+        //Render HEALTH UI
+        float Half = widthBuffer.get(0)/2;
+        UIRenderer.DrawProgressBar(GLFWWindow,(float)(Half - (Half*0.8)) ,(float) (heightBuffer.get(0)*0.9),Player.getHealthPercent(),(float) (heightBuffer.get(0)*0.05),(float) (Half*1.6), ColorUtils.Red);
+
+    }
+
     private void loop() {
         glClearColor(0,0,0,1);
+        LastTimeZombiesSpawn = System.nanoTime();
 
         while (!GLFW.glfwWindowShouldClose(GLFWWindow)) {
+            if(Player.getHealth() <= 0) Reset();
+
             //Get Events
             GLFW.glfwPollEvents();
             //Controls
@@ -206,7 +234,7 @@ public class Window {
             //Render Objects
             drawAllMeshes(pDelta);
 
-            //Render UI
+            RenderUI();
 
 
             glPopMatrix();

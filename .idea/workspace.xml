@@ -14,11 +14,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Zombie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Mesh.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/render/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/render/Texture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/ui/Text.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/FileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/MathUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/MathUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +77,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/mineb/IdeaProjects/Winter2023GameJam/out/artifacts/Winter2023GameJam_jar",
+    "last_opened_file_path": "C:/Users/mineb/IdeaProjects/Winter2023GameJam/SlickUtil/slick-util3.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -97,11 +98,11 @@
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\resources\imgs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\resources\fonts" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\resources\models" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\resources\imgs" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar\models" />
-      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -190,6 +191,7 @@
       <workItem from="1675556038008" duration="343000" />
       <workItem from="1675556492308" duration="3784000" />
       <workItem from="1675567076761" duration="13601000" />
+      <workItem from="1675790565582" duration="17969000" />
     </task>
     <servers />
   </component>

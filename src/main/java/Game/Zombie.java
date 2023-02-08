@@ -28,11 +28,15 @@ public class Zombie {
     public void update(Player p, Camera cam,float Delta){
         Vector3f goToPos = p.getPosition();
         mesh.lookAt(goToPos);
-        if(!mesh.CloseEnough(goToPos)) mesh.MoveToAngle(goToPos,0.005f,Delta/100);
+        if(!mesh.CloseEnough(goToPos)) mesh.MoveToAngle(goToPos,0.005f,Delta/200);
         else{
             //Too Close Deal Damage
+            p.takeDamage(1f);
         }
         mesh.Draw(cam);
     }
 
+    public void Destroy(){
+     mesh.Destroy();
+    }
 }

@@ -27,20 +27,9 @@
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-nfd/3.3.1/869fe532a50455e8b2d924f498bfb95f80b41aed/lwjgl-nfd-3.3.1-natives-windows.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-opengl/3.3.1/c1807e9bd571402787d7e37e3029776ae2513bb8/lwjgl-opengl-3.3.1-natives-windows.jar" path-in-jar="/" />
       <element id="dir-copy" path="$PROJECT_DIR$/src/main/resources" />
-      <element id="library" level="project" name="Gradle: org.slick2d:slick2d-core:1.0.0" />
       <element id="library" level="project" name="Gradle: org.lwjgl:lwjgl:natives-windows:3.3.1" />
       <element id="library" level="project" name="Gradle: org.lwjgl:lwjgl:3.3.1" />
-      <element id="library" level="project" name="Gradle: net.java.jinput:jinput-platform:natives-linux:2.0.5" />
-      <element id="library" level="project" name="Gradle: net.java.jinput:jinput-platform:natives-osx:2.0.5" />
-      <element id="library" level="project" name="Gradle: net.java.jinput:jinput-platform:natives-windows:2.0.5" />
-      <element id="library" level="project" name="Gradle: net.java.jinput:jinput:2.0.5" />
-      <element id="library" level="project" name="Gradle: net.java.jutils:jutils:1.0.0" />
-      <element id="library" level="project" name="Gradle: org.jcraft:jorbis:0.0.17" />
       <element id="library" level="project" name="Gradle: org.joml:joml:1.10.5" />
-      <element id="library" level="project" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.0" />
-      <element id="library" level="project" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.0" />
-      <element id="library" level="project" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-windows:2.9.0" />
-      <element id="library" level="project" name="Gradle: org.lwjgl.lwjgl:lwjgl:2.9.0" />
       <element id="library" level="project" name="Gradle: org.lwjgl:lwjgl-assimp:3.3.1" />
       <element id="library" level="project" name="Gradle: org.lwjgl:lwjgl-assimp:natives-windows:3.3.1" />
       <element id="library" level="project" name="Gradle: org.lwjgl:lwjgl-glfw:3.3.1" />
@@ -54,6 +43,14 @@
       <element id="library" level="project" name="Gradle: org.lwjgl:lwjgl-stb:3.3.1" />
       <element id="library" level="project" name="Gradle: org.lwjgl:lwjgl-stb:natives-windows:3.3.1" />
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slick2d/slick2d-core/1.0.0/6c5a93f94c4a50f57e14040426054d50ca6ac9a7/slick2d-core-1.0.0.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/SlickUtil/slick-util3.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/SlickUtil/jorbis-0.0.15.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/SlickUtil/jogg-0.0.7.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/SlickUtil/ibxm.jar" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/SlickUtil/ibxm.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/SlickUtil/jogg-0.0.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/SlickUtil/jorbis-0.0.15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/SlickUtil/slick-util3.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

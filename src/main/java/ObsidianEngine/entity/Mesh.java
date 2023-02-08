@@ -256,6 +256,6 @@ public class Mesh {
 
     public boolean CloseEnough(Vector3f otherPosition){
         float Dist = Position.distance(otherPosition);
-        return Dist < 30;
+        return Dist < 50;
     }
 }
