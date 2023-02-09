@@ -108,53 +108,140 @@ public class FileUtils {
         return FinalM;
     }
 
-    public static Mesh LoadOBJWTextureSingle(String path, Texture texture){
-        //System.out.println(getJarLoc());
-        AIScene scene = Assimp.aiImportFile(getJarLoc() + path,Assimp.aiProcess_Triangulate);
+    static Texture PlayerTexture;
+    static Vector3f[] PlayerV;
+    static int[] PlayerI;
+    static float[] PlayerUVs;
 
-        if(scene == null) { System.err.println("Couldn't Find File: " + path); return null; }
+    public static Mesh LoadPlayer(){
+        String path = "/models/Link.obj";
 
-        Mesh FinalM = null;
-        PointerBuffer buffer = scene.mMeshes();
-        for(int i = 0; i < buffer.limit(); i++){
-            AIMesh mesh = AIMesh.create(buffer.get(i));
+        if(PlayerTexture == null || PlayerV == null || PlayerI == null || PlayerUVs == null){
+            //System.out.println(getJarLoc());
+            AIScene scene = Assimp.aiImportFile(getJarLoc() + path,Assimp.aiProcess_Triangulate);
 
-            int v = mesh.mNumVertices();
-            AIVector3D.Buffer VB = mesh.mVertices();
+            if(scene == null) { System.err.println("Couldn't Find File: " + path); return null; }
 
-            PointerBuffer uv = mesh.mTextureCoords();
+            Mesh FinalM = null;
+            PointerBuffer buffer = scene.mMeshes();
+            for(int i = 0; i < buffer.limit(); i++){
+                AIMesh mesh = AIMesh.create(buffer.get(i));
 
-            int fc = mesh.mNumFaces();
-            AIFace.Buffer FB = mesh.mFaces();
+                int v = mesh.mNumVertices();
+                AIVector3D.Buffer VB = mesh.mVertices();
 
-            Vector3f[] verticies = new Vector3f[v];
-            int[] indicies = new int[fc * 3];
+                PointerBuffer uv = mesh.mTextureCoords();
 
-            //Vertices Calculation
-            for(int j = 0; j < v; j++){
-                verticies[j] = new Vector3f(VB.get(j).x(),VB.get(j).y(),VB.get(j).z());
+                int fc = mesh.mNumFaces();
+                AIFace.Buffer FB = mesh.mFaces();
+
+                Vector3f[] verticies = new Vector3f[v];
+                int[] indicies = new int[fc * 3];
+
+                //Vertices Calculation
+                for(int j = 0; j < v; j++){
+                    verticies[j] = new Vector3f(VB.get(j).x(),VB.get(j).y(),VB.get(j).z());
+                }
+
+                //UV Calculations
+                AIVector3D.Buffer coords = mesh.mTextureCoords(i);
+                float[] UVs = new float[coords.limit()*2];
+
+                for(int l = 0; l < coords.limit(); l++){
+                    UVs[l] = coords.x();
+                    UVs[l+1] = coords.y();
+                }
+
+                //IIndices calculation
+                for(int k = 0; k < fc; k++){
+                    indicies[k * 3 + 0] = FB.get(k).mIndices().get(0);
+                    indicies[k * 3 + 1] = FB.get(k).mIndices().get(1);
+                    indicies[k * 3 + 2] = FB.get(k).mIndices().get(2);
+                }
+
+                Texture zT = new Texture("/imgs/PlayerTexture.png");
+
+                PlayerUVs = UVs;
+                PlayerV = verticies;
+                PlayerI = indicies;
+                PlayerTexture = zT;
+
+                Mesh m = new Mesh(verticies,indicies, Shader.defaultTextureShader,zT,UVs);
+                return m;
             }
-
-            //UV Calculations
-            AIVector3D.Buffer coords = mesh.mTextureCoords(i);
-            float[] UVs = new float[coords.limit()*2];
-
-            for(int l = 0; l < coords.limit(); l++){
-                UVs[l] = coords.x();
-                UVs[l+1] = coords.y();
-            }
-
-            //IIndices calculation
-            for(int k = 0; k < fc; k++){
-                indicies[k * 3 + 0] = FB.get(k).mIndices().get(0);
-                indicies[k * 3 + 1] = FB.get(k).mIndices().get(1);
-                indicies[k * 3 + 2] = FB.get(k).mIndices().get(2);
-            }
-
-            Mesh m = new Mesh(verticies,indicies, Shader.defaultTextureShader,texture,UVs);
-            return m;
+            return null;
         }
-        return null;
+        else {
+            return new Mesh(PlayerV,PlayerI, Shader.defaultTextureShader,PlayerTexture,PlayerUVs);
+        }
+    }
+
+    static Texture ZombieTexture;
+    static Vector3f[] ZombieV;
+    static int[] ZombieI;
+    static float[] ZombieUVs;
+
+    public static Mesh LoadZombie(){
+        String path = "/models/Zombie.obj";
+
+        if(ZombieTexture == null || ZombieV == null || ZombieI == null || ZombieUVs == null){
+            //System.out.println(getJarLoc());
+            AIScene scene = Assimp.aiImportFile(getJarLoc() + path,Assimp.aiProcess_Triangulate);
+
+            if(scene == null) { System.err.println("Couldn't Find File: " + path); return null; }
+
+            Mesh FinalM = null;
+            PointerBuffer buffer = scene.mMeshes();
+            for(int i = 0; i < buffer.limit(); i++){
+                AIMesh mesh = AIMesh.create(buffer.get(i));
+
+                int v = mesh.mNumVertices();
+                AIVector3D.Buffer VB = mesh.mVertices();
+
+                PointerBuffer uv = mesh.mTextureCoords();
+
+                int fc = mesh.mNumFaces();
+                AIFace.Buffer FB = mesh.mFaces();
+
+                Vector3f[] verticies = new Vector3f[v];
+                int[] indicies = new int[fc * 3];
+
+                //Vertices Calculation
+                for(int j = 0; j < v; j++){
+                    verticies[j] = new Vector3f(VB.get(j).x(),VB.get(j).y(),VB.get(j).z());
+                }
+
+                //UV Calculations
+                AIVector3D.Buffer coords = mesh.mTextureCoords(i);
+                float[] UVs = new float[coords.limit()*2];
+
+                for(int l = 0; l < coords.limit(); l++){
+                    UVs[l] = coords.x();
+                    UVs[l+1] = coords.y();
+                }
+
+                //IIndices calculation
+                for(int k = 0; k < fc; k++){
+                    indicies[k * 3 + 0] = FB.get(k).mIndices().get(0);
+                    indicies[k * 3 + 1] = FB.get(k).mIndices().get(1);
+                    indicies[k * 3 + 2] = FB.get(k).mIndices().get(2);
+                }
+
+                Texture zT = new Texture("/imgs/ZombieTexture.png");
+
+                ZombieUVs = UVs;
+                ZombieV = verticies;
+                ZombieI = indicies;
+                ZombieTexture = zT;
+
+                Mesh m = new Mesh(verticies,indicies, Shader.defaultTextureShader,zT,UVs);
+                return m;
+            }
+            return null;
+        }
+        else {
+            return new Mesh(ZombieV,ZombieI, Shader.defaultTextureShader,ZombieTexture,ZombieUVs);
+        }
     }
 
     public static Mesh LoadOBJ(String path,Vector3f Color, ArrayList<Mesh> AllMeshes){
@@ -194,40 +281,54 @@ public class FileUtils {
         }
         return FinalM;
     }
-    public static Mesh LoadOBJSingle(String path,Vector3f Color){
-        //System.out.println(getJarLoc());
-        AIScene scene = Assimp.aiImportFile(getJarLoc() + path,Assimp.aiProcess_Triangulate);
 
-        if(scene == null) { System.err.println("Couldn't Find File: " + path); return null; }
-        Mesh FinalM = null;
-        PointerBuffer buffer = scene.mMeshes();
-        for(int i = 0; i < buffer.limit(); i++){
-            AIMesh mesh = AIMesh.create(buffer.get(i));
+    static int[] BulletI;
+    static Vector3f[] BulletV;
 
-            int v = mesh.mNumVertices();
-            AIVector3D.Buffer VB = mesh.mVertices();
+    public static Mesh LoadBullet(){
+        String path = "/models/Bullet.obj";
+        Vector3f Color = ColorUtils.Red;
 
-            int fc = mesh.mNumFaces();
-            AIFace.Buffer FB = mesh.mFaces();
+        if(BulletI == null || BulletV == null){
+            //System.out.println(getJarLoc());
+            AIScene scene = Assimp.aiImportFile(getJarLoc() + path,Assimp.aiProcess_Triangulate);
 
-            Vector3f[] verticies = new Vector3f[v];
-            int[] indicies = new int[fc * 3];
+            if(scene == null) { System.err.println("Couldn't Find File: " + path); return null; }
+            Mesh FinalM = null;
+            PointerBuffer buffer = scene.mMeshes();
+            for(int i = 0; i < buffer.limit(); i++){
+                AIMesh mesh = AIMesh.create(buffer.get(i));
 
-            //Vertices Calculation
-            for(int j = 0; j < v; j++){
-                verticies[j] = new Vector3f(VB.get(j).x(),VB.get(j).y(),VB.get(j).z());
+                int v = mesh.mNumVertices();
+                AIVector3D.Buffer VB = mesh.mVertices();
+
+                int fc = mesh.mNumFaces();
+                AIFace.Buffer FB = mesh.mFaces();
+
+                Vector3f[] verticies = new Vector3f[v];
+                int[] indicies = new int[fc * 3];
+
+                //Vertices Calculation
+                for(int j = 0; j < v; j++){
+                    verticies[j] = new Vector3f(VB.get(j).x(),VB.get(j).y(),VB.get(j).z());
+                }
+
+                //Indices calculation
+                for(int k = 0; k < fc; k++){
+                    indicies[k * 3 + 0] = FB.get(k).mIndices().get(0);
+                    indicies[k * 3 + 1] = FB.get(k).mIndices().get(1);
+                    indicies[k * 3 + 2] = FB.get(k).mIndices().get(2);
+                }
+
+                BulletI = indicies;
+                BulletV  = verticies;
+                Mesh m = new Mesh(verticies,indicies, Shader.defaultShader,Color);
+                return m;
             }
-
-            //Indices calculation
-            for(int k = 0; k < fc; k++){
-                indicies[k * 3 + 0] = FB.get(k).mIndices().get(0);
-                indicies[k * 3 + 1] = FB.get(k).mIndices().get(1);
-                indicies[k * 3 + 2] = FB.get(k).mIndices().get(2);
-            }
-
-            Mesh m = new Mesh(verticies,indicies, Shader.defaultShader,Color);
-            return m;
+            return FinalM;
         }
-        return FinalM;
+        else{
+            return new Mesh(BulletV,BulletI, Shader.defaultShader,Color);
+        }
     }
 }

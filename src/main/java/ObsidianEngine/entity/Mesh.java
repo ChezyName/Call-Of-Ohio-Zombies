@@ -132,6 +132,12 @@ public class Mesh {
         this.Translate(normalizedVector);
     }
 
+    public void Translate(float px, float py, float pz, float speed){
+        this.Position.x += px * speed;
+        this.Position.y += py * speed;
+        this.Position.z += pz * speed;
+    }
+
     public void Translate(Vector3f newPosition){
         newPosition.normalize();
         this.Position.x += newPosition.x;

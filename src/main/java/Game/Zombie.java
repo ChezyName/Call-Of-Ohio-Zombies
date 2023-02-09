@@ -13,27 +13,47 @@ import java.util.Vector;
 
 public class Zombie {
     private Mesh mesh;
+    private boolean Dead;
+    private int WaveSpawnedOn = 0;
 
-    public Zombie(Vector3f StartPosiition, float Radius){
-        Mesh Zombie = FileUtils.LoadOBJWTextureSingle("/models/Zombie.obj", new Texture("/imgs/ZombieTexture.png"));
+    public Zombie(Vector3f StartPosiition, float Radius, int Wave){
+        Mesh Zombie = FileUtils.LoadZombie();
         Zombie.setScale(50);
         this.mesh = Zombie;
+        this.WaveSpawnedOn = Wave;
 
-        float X = (StartPosiition.x) + (MathUtils.getRandomNumber() * (Radius/2));
-        float Y = (StartPosiition.y) + (MathUtils.getRandomNumber() * (Radius/2));
+        System.out.println("Spawning Zombies @ " + StartPosiition);
+
+        float X = (StartPosiition.x) + (MathUtils.getRandomPosNegHalf() * (Radius));
+        float Y = (StartPosiition.y) + (MathUtils.getRandomPosNegHalf() * (Radius));
         Zombie.setPosition(X,0,Y);
+        Dead = false;
+    }
+
+    public Vector3f getPos(){
+        return mesh.getPosition();
     }
 
 
     public void update(Player p, Camera cam,float Delta){
-        Vector3f goToPos = p.getPosition();
-        mesh.lookAt(goToPos);
-        if(!mesh.CloseEnough(goToPos)) mesh.MoveToAngle(goToPos,0.005f,Delta/200);
-        else{
-            //Too Close Deal Damage
-            p.takeDamage(1f);
+        if(!isDead()){
+            Vector3f goToPos = p.getPosition();
+            mesh.lookAt(goToPos);
+            if(!mesh.CloseEnough(goToPos)) mesh.MoveToAngle(goToPos,(WaveSpawnedOn * 0.5f) * 0.005f,Delta/200);
+            else{
+                //Too Close Deal Damage
+                p.takeDamage(1f);
+            }
         }
         mesh.Draw(cam);
+    }
+
+    public void Died(){
+        Dead = true;
+    }
+
+    public boolean isDead(){
+        return Dead;
     }
 
     public void Destroy(){

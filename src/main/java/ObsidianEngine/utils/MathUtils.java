@@ -23,9 +23,10 @@ public class MathUtils {
         return (float)(random.nextDouble() * 2 - 1);
     }
 
-    public static int getRandomPosNeg(){
+    public static float getRandomPosNegHalf(){
         float PN = getRandomNumber();
-        if(PN > 0) return 1;
-        else return -1;
+        if(PN > 0.5) return 1;
+        if(PN < -0.5) return -1;
+        else return 0.5f;
     }
 }

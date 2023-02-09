@@ -43,6 +43,7 @@ public class Window {
     private ArrayList<Mesh> MapPieces = new ArrayList<Mesh>();
     private ArrayList<Zombie> Zombies = new ArrayList<Zombie>();
     private ArrayList<Bullet> Bullets = new ArrayList<Bullet>();
+    private long LastTimeShot = System.currentTimeMillis();
 
     private Window(){
         this.width = 1280;
@@ -67,7 +68,7 @@ public class Window {
         float TimeBetween = System.currentTimeMillis() - FPStime;
 
         int FPS = (int) (1000 / TimeBetween);
-        GLFW.glfwSetWindowTitle(GLFWWindow, title + " | FPS: " + FPS);
+        GLFW.glfwSetWindowTitle(GLFWWindow, title + " | FPS: " + FPS + " [WAVE #" + Wave + "]");
         FPStime = System.currentTimeMillis();
     }
 
@@ -142,11 +143,13 @@ public class Window {
         MapPieces.add(map);
          */
 
-        Player = new Player(FileUtils.LoadOBJWTextureSingle("/models/Link.obj", new Texture("/imgs/PlayerTexture.png")));
+        Player = new Player(FileUtils.LoadPlayer());
     }
 
     private int Wave = 0;
+    private boolean reset = false;
     private void Reset(){
+        reset = true;
         for(int i = 0; i < Zombies.size(); i++){
             Zombie z = Zombies.get(i);
             z.Destroy();
@@ -162,27 +165,42 @@ public class Window {
         Player.resetHealth();
         Wave = 0;
         //Player.setPosition(0,0,0);
+
+        for(int i = 0; i < Zombies.size(); i++){
+            Zombie z = Zombies.get(i);
+            z.Destroy();
+            Zombies.remove(i);
+        }
+
+        reset = false;
     }
 
     private void updateBullets(float Delta){
         for(int i = 0; i < Bullets.size(); i++){
             Bullet b = Bullets.get(i);
-            b.Update(cam,Delta);
+            b.Update(cam,Delta,Zombies);
             if(b.Dead()) Bullets.remove(i);
         }
     }
 
     private void updateZombies(float Delta){
-        for(Zombie z : Zombies){
-            z.update(Player,cam,Delta);
+        for(int i = 0; i < Zombies.size(); i++){
+            Zombie z = Zombies.get(i);
+            if(z.isDead()){
+                z.Destroy();
+                Zombies.remove(i);
+            }
+            else{
+                z.update(Player,cam,Delta);
+            }
         }
 
         //To Seconds
         if(Zombies.size() <= 0){
-            //All Zombies Dead / Game Reset
+            //All Zombies Dead / New Wave
             Wave += 1;
-            for(int i = 0; i < Wave; i++){
-                Zombies.add(new Zombie(Player.getPosition(),350));
+            for(int i = 0; i < Math.pow(Wave,2); i++){
+                Zombies.add(new Zombie(cam.getPosition(),350,Wave));
             }
         }
     }
@@ -214,8 +232,8 @@ public class Window {
 
         //Render HEALTH UI
         float Half = widthBuffer.get(0)/2;
+        UIRenderer.DrawProgressBar(GLFWWindow,(float)(Half - (Half*0.8)) ,(float) (heightBuffer.get(0)*0.9),1,(float) (heightBuffer.get(0)*0.05),(float) (Half*1.6), ColorUtils.White);
         UIRenderer.DrawProgressBar(GLFWWindow,(float)(Half - (Half*0.8)) ,(float) (heightBuffer.get(0)*0.9),Player.getHealthPercent(),(float) (heightBuffer.get(0)*0.05),(float) (Half*1.6), ColorUtils.Red);
-
     }
 
     private void loop() {
@@ -230,12 +248,19 @@ public class Window {
             float deltaTime = getDelta();
             float pDelta = (deltaTime/500);
 
+            /*
             if(Input.getKeyDown(GLFW_KEY_W)) Player.setPosition(0,0,-(0.05f)*pDelta);
             if(Input.getKeyDown(GLFW_KEY_S)) Player.setPosition(0,0,(0.05f)*pDelta);
             if(Input.getKeyDown(GLFW_KEY_A)) Player.setPosition(-(0.05f)*pDelta,0,0);
             if(Input.getKeyDown(GLFW_KEY_D)) Player.setPosition((0.05f)*pDelta,0,0);
+            */
 
-            if(Input.isMouseButtonDown(0)) Bullets.add(new Bullet(new Vector3f(cam.getPosition().x,0,cam.getPosition().z),Player.getRotation()));
+            float BulletDelay = (System.currentTimeMillis() - LastTimeShot);
+
+            if(Input.isMouseButtonDown(0) && BulletDelay >= (400/(Wave <= 0 ? 1 : Wave))) {
+                Bullets.add(new Bullet(new Vector3f(cam.getPosition().x,0,cam.getPosition().z),Player.getRotation()));
+                LastTimeShot = System.currentTimeMillis();
+            }
 
             Player.setRotation(0,MouseUtils.getMouseRotFromCenter(GLFWWindow),0);
 
@@ -247,10 +272,9 @@ public class Window {
             glPushMatrix();
 
             //Render Objects
-            drawAllMeshes(pDelta);
+            if(!reset) drawAllMeshes(pDelta);
 
             RenderUI();
-
 
             glPopMatrix();
             GLFW.glfwSwapBuffers(GLFWWindow);
