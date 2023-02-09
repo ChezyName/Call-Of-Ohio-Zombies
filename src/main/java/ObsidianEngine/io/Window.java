@@ -15,11 +15,13 @@ import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFW;
 import static  org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.system.MemoryUtil;
 
+import java.io.File;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.Random;
@@ -101,6 +103,13 @@ public class Window {
         if(GLFWWindow == MemoryUtil.NULL){
             throw new IllegalStateException("Failed to create GLFW Window");
         }
+
+        //WINDOW ICON
+        FileUtils.ImageBytes Icon = FileUtils.getImageIcon(FileUtils.getJarLoc() + "/imgs/GAMEICON.png");
+        GLFWImage image = GLFWImage.malloc(); GLFWImage.Buffer imagebf = GLFWImage.malloc(1);
+        image.set(Icon.width, Icon.heigh, Icon.image);
+        imagebf.put(0, image);
+        glfwSetWindowIcon(GLFWWindow, imagebf);
 
         //Create OPENGL Renderer
         GLFW.glfwMakeContextCurrent(GLFWWindow);

@@ -7,6 +7,7 @@ import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.assimp.*;
+import org.lwjgl.system.MemoryStack;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -21,6 +22,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static org.lwjgl.BufferUtils.createByteBuffer;
+import static org.lwjgl.stb.STBImage.stbi_load;
 import static org.lwjgl.system.MemoryUtil.memSlice;
 
 public class FileUtils {
@@ -330,5 +332,33 @@ public class FileUtils {
         else{
             return new Mesh(BulletV,BulletI, Shader.defaultShader,Color);
         }
+    }
+
+    public static class ImageBytes{
+        public ByteBuffer image;
+        public int width, heigh;
+        public ImageBytes(int width, int heigh, ByteBuffer image) {
+            this.image = image;
+            this.heigh = heigh;
+            this.width = width;
+        }
+    }
+
+    public static ImageBytes getImageIcon(String path){
+        ByteBuffer image;
+        int width, heigh;
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            IntBuffer comp = stack.mallocInt(1);
+            IntBuffer w = stack.mallocInt(1);
+            IntBuffer h = stack.mallocInt(1);
+
+            image = stbi_load(path, w, h, comp, 4);
+            if (image == null) {
+                // throw new resource_error("Could not load image resources.");
+            }
+            width = w.get();
+            heigh = h.get();
+        }
+        return new ImageBytes(width, heigh, image);
     }
 }
