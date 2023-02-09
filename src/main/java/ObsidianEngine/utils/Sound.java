@@ -73,6 +73,10 @@ public class Sound {
             alSourcePlay(sourceId);
             isPlaying = true;
         }
+        else{
+            alSourcei(sourceId,AL_POSITION,0);
+            alSourcePlay(sourceId);
+        }
     }
 
     public void stop(){

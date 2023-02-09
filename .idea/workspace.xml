@@ -11,10 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5b516d30-da46-4da6-a7bf-c00ec8a86d27" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Zombie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/entity/Mesh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReadMe.md" beforeDir="false" afterPath="$PROJECT_DIR$/ReadMe.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/MathUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/MathUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/Sound.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,26 +64,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/mineb/IdeaProjects/Winter2023GameJam/out/artifacts/Winter2023GameJam_jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.3861145",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mineb/IdeaProjects/Winter2023GameJam/out/artifacts/Winter2023GameJam_jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.3861145&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar" />
@@ -194,7 +193,8 @@
       <workItem from="1675567076761" duration="13601000" />
       <workItem from="1675790565582" duration="17969000" />
       <workItem from="1675886506088" duration="308000" />
-      <workItem from="1675886999322" duration="18075000" />
+      <workItem from="1675886999322" duration="20165000" />
+      <workItem from="1675927755111" duration="21000" />
     </task>
     <servers />
   </component>

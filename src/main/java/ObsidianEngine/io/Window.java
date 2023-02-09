@@ -22,6 +22,7 @@ import org.lwjgl.system.MemoryUtil;
 
 import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Window {
     private int width, height;
@@ -31,6 +32,8 @@ public class Window {
     private TimeUtils time;
     private Input inputSystem;
     private Sound mainMusic;
+    private ArrayList<Sound> GunShots = new ArrayList<Sound>();
+    private int GunIndex = 0;
 
     private static Window window = null;
     private Camera cam;
@@ -127,6 +130,13 @@ public class Window {
         Audio.getAudioManager();
         mainMusic = new Sound(FileUtils.getJarLoc() + "/sounds/MainTheme.ogg",true);
         mainMusic.play();
+
+        //Gunshots SFX
+        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_5.ogg",false));
+        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_5.ogg",false));
+        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_5.ogg",false));
+        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_5.ogg",false));
+        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_5.ogg",false));
 
         //Post OpenGL Init
         //Init Default Shader
@@ -262,6 +272,18 @@ public class Window {
             if(Input.isMouseButtonDown(0) && BulletDelay >= (400/(Wave <= 0 ? 1 : Wave))) {
                 Bullets.add(new Bullet(new Vector3f(cam.getPosition().x,0,cam.getPosition().z),Player.getRotation()));
                 LastTimeShot = System.currentTimeMillis();
+
+                //Play Random Sound From Array
+                /*
+                Random rand = new Random();
+                int randomIndex = rand.nextInt(GunShots.size());
+                GunShots.get(randomIndex).play();
+                 */
+
+                //loop thru gun shots
+                GunShots.get(GunIndex).play();
+                GunIndex++;
+                if(GunIndex >= GunShots.size()) GunIndex = 0;
             }
 
             Player.setRotation(0,MouseUtils.getMouseRotFromCenter(GLFWWindow),0);
