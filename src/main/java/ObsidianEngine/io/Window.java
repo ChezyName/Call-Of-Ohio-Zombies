@@ -7,12 +7,8 @@ import Game.Zombie;
 import ObsidianEngine.entity.Mesh;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
-import ObsidianEngine.render.Texture;
 import ObsidianEngine.ui.UIRenderer;
-import ObsidianEngine.utils.ColorUtils;
-import ObsidianEngine.utils.FileUtils;
-import ObsidianEngine.utils.MouseUtils;
-import ObsidianEngine.utils.TimeUtils;
+import ObsidianEngine.utils.*;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.Version;
@@ -26,7 +22,6 @@ import org.lwjgl.system.MemoryUtil;
 
 import java.nio.IntBuffer;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class Window {
     private int width, height;
@@ -35,6 +30,7 @@ public class Window {
     private long GLFWWindow;
     private TimeUtils time;
     private Input inputSystem;
+    private Sound mainMusic;
 
     private static Window window = null;
     private Camera cam;
@@ -110,6 +106,9 @@ public class Window {
         //Display Window
         GLFW.glfwShowWindow(GLFWWindow);
 
+        //INIT AUDIO LIBRARY
+        Audio.getAudioManager();
+
         //LWJGL -> Binding To OPENGL & GLFW
         GL.createCapabilities();
         glMatrixMode(GL_PROJECTION);
@@ -124,6 +123,11 @@ public class Window {
         //Post Window Init CoreSystems
         inputSystem = new Input(GLFWWindow);
 
+        //Create Audio Context + Load Audio File
+        Audio.getAudioManager();
+        mainMusic = new Sound(FileUtils.getJarLoc() + "/sounds/MainTheme.ogg",true);
+        mainMusic.play();
+
         //Post OpenGL Init
         //Init Default Shader
         Shader.defaultShader = new Shader("/shaders/mainVertex.glsl","/shaders/mainFragment.glsl");
@@ -134,7 +138,7 @@ public class Window {
 
         //Starting Meshes & Models
         //Load Map [MULTI-SPRTIE]
-        Map.getMap(550,50,MapPieces,cam,GLFWWindow,(title + " " + versionNumber));
+        Map.getMap(800,50,MapPieces,cam,GLFWWindow,(title + " " + versionNumber));
 
         /* SINGLE COLOR MAP
         Mesh map = new Plane(15000,15000,new Vector3f(0,0,0));
@@ -200,7 +204,7 @@ public class Window {
             //All Zombies Dead / New Wave
             Wave += 1;
             for(int i = 0; i < Math.pow(Wave,2); i++){
-                Zombies.add(new Zombie(cam.getPosition(),350,Wave));
+                Zombies.add(new Zombie(new Vector3f(-30,0,0),350 * ((Wave/2) <= 1 ? 1 : Wave),Wave));
             }
         }
     }
@@ -248,12 +252,10 @@ public class Window {
             float deltaTime = getDelta();
             float pDelta = (deltaTime/500);
 
-            /*
             if(Input.getKeyDown(GLFW_KEY_W)) Player.setPosition(0,0,-(0.05f)*pDelta);
             if(Input.getKeyDown(GLFW_KEY_S)) Player.setPosition(0,0,(0.05f)*pDelta);
             if(Input.getKeyDown(GLFW_KEY_A)) Player.setPosition(-(0.05f)*pDelta,0,0);
             if(Input.getKeyDown(GLFW_KEY_D)) Player.setPosition((0.05f)*pDelta,0,0);
-            */
 
             float BulletDelay = (System.currentTimeMillis() - LastTimeShot);
 
@@ -284,6 +286,7 @@ public class Window {
 
         //Cleanup
         inputSystem.destroy(GLFWWindow);
+        Audio.getAudioManager().Destroy();
         GLFW.glfwDestroyWindow(GLFWWindow);
     }
 }

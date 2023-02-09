@@ -1,6 +1,7 @@
 package ObsidianEngine.utils;
 
 import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector3fc;
 
@@ -23,10 +24,11 @@ public class MathUtils {
         return (float)(random.nextDouble() * 2 - 1);
     }
 
-    public static float getRandomPosNegHalf(){
-        float PN = getRandomNumber();
-        if(PN > 0.5) return 1;
-        if(PN < -0.5) return -1;
-        else return 0.5f;
+    public static Vector2f getRandomPointOnRadius(float centerX,float centerY,float radius){
+        Random random = new Random();
+        double angle = random.nextDouble() * 2 * Math.PI;
+        double x = centerX + radius * Math.cos(angle);
+        double y = centerY + radius * Math.sin(angle);
+        return new Vector2f((float) x,(float) y);
     }
 }

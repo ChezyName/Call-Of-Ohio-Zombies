@@ -22,7 +22,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL30.*;
 
-public class Mesh {
+public class Mesh implements Cloneable {
     private Vector3f[] vertices;
     private int[] indices;
     private float[] UVs;
@@ -267,5 +267,10 @@ public class Mesh {
     public boolean CloseEnough(Vector3f otherPosition){
         float Dist = Position.distance(otherPosition);
         return Dist < 50;
+    }
+
+    public Object clone() throws CloneNotSupportedException
+    {
+        return super.clone();
     }
 }

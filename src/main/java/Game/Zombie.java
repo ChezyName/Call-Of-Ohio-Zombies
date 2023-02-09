@@ -5,6 +5,7 @@ import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Texture;
 import ObsidianEngine.utils.FileUtils;
 import ObsidianEngine.utils.MathUtils;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 import java.util.ArrayList;
@@ -22,11 +23,8 @@ public class Zombie {
         this.mesh = Zombie;
         this.WaveSpawnedOn = Wave;
 
-        System.out.println("Spawning Zombies @ " + StartPosiition);
-
-        float X = (StartPosiition.x) + (MathUtils.getRandomPosNegHalf() * (Radius));
-        float Y = (StartPosiition.y) + (MathUtils.getRandomPosNegHalf() * (Radius));
-        Zombie.setPosition(X,0,Y);
+        Vector2f RandomPoint = MathUtils.getRandomPointOnRadius(StartPosiition.x,StartPosiition.z,Radius);
+        Zombie.setPosition(RandomPoint.x,0,RandomPoint.y);
         Dead = false;
     }
 
