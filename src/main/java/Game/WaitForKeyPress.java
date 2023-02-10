@@ -23,9 +23,10 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
 
 public class WaitForKeyPress {
+    static Image MenuImage = new Image(new Texture("/imgs/GameMenuSTART.jpg"));
+
     public static void WaitMainMenu(long WinID, Camera c,String title){
         boolean Wait = true;
-        Image MenuImage = new Image(new Vector2f(0,0),new Vector2f(512,512),new Texture("/imgs/GameMenu.jpg"));
 
         while (Wait && !GLFW.glfwWindowShouldClose(WinID)){
             GLFW.glfwPollEvents();
@@ -35,7 +36,7 @@ public class WaitForKeyPress {
             //Render Objects
             GLFW.glfwSetWindowTitle(WinID,title + " | press any key to start...");
 
-            MenuImage.Draw(WinID);
+            MenuImage.Draw();
 
             if(Input.isKeyDown()) Wait = false;
 

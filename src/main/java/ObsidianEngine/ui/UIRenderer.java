@@ -37,6 +37,9 @@ public class UIRenderer {
         glVertex2f(posX + (Width * percentage),posY);
         glEnd();
 
+        //Reset to white
+        glColor3f(255,255,255);
+
         // Making sure we can render 3d again
         glMatrixMode(GL_PROJECTION);
         glPopMatrix();

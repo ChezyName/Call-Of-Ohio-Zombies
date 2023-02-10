@@ -13,7 +13,7 @@ public class ColorUtils {
     public static Vector3f Green = new Vector3f(0,255,0);
     public static Vector3f Blue = new Vector3f(0,0,255);
     public static Vector3f Cyan = new Vector3f(0,255,255);
-    public static Vector3f Purple = new Vector3f(230,230,250);
+    public static Vector3f Purple = new Vector3f(75,0,130);
     public static Vector3f Color(float red,float green,float blue) { return new Vector3f(red,green,blue); }
     public static Vector3f RandColor(){
         int rc = new Random(System.currentTimeMillis()).nextInt(8);

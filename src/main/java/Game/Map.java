@@ -5,6 +5,7 @@ import ObsidianEngine.entity.Plane;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
 import ObsidianEngine.render.Texture;
+import ObsidianEngine.ui.Image;
 import ObsidianEngine.ui.UIRenderer;
 import ObsidianEngine.utils.ColorUtils;
 import org.joml.Vector2f;
@@ -19,6 +20,7 @@ import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Map {
+    static Image MenuImage = new Image(new Texture("/imgs/GameMenu.jpg"));
     private static void renderMap(ArrayList<Mesh> Meshes, long GLFWWindow, Camera cam,String title,int n,int max){
         //Clear
         GLFW.glfwPollEvents();
@@ -29,9 +31,12 @@ public class Map {
         GLFW.glfwSetWindowTitle(GLFWWindow,title + " | Loading Map: " + n + "/" + max + " [" + percentage + "%]");
 
         //Render Objects
+        /*
         for(Mesh m : Meshes){
             m.Draw(cam);
         }
+        */
+        MenuImage.Draw();
 
         IntBuffer widthBuffer = BufferUtils.createIntBuffer(1);
         IntBuffer heightBuffer = BufferUtils.createIntBuffer(1);
@@ -40,7 +45,8 @@ public class Map {
 
         //RenderUI
         float Half = widthBuffer.get(0)/2;
-        UIRenderer.DrawProgressBar(GLFWWindow,(float)(Half - (Half*0.8)) ,(float) (heightBuffer.get(0)*0.9),((float) n/ (float) max),(float) (heightBuffer.get(0)*0.05),(float) (Half*1.6),ColorUtils.White);
+        UIRenderer.DrawProgressBar(GLFWWindow,(float)(Half - (Half*0.8)) ,(float) (heightBuffer.get(0)*0.9),1,(float) (heightBuffer.get(0)*0.05),(float) (Half*1.6),ColorUtils.Black);
+        UIRenderer.DrawProgressBar(GLFWWindow,(float)(Half - (Half*0.8)) ,(float) (heightBuffer.get(0)*0.9),((float) n/ (float) max),(float) (heightBuffer.get(0)*0.05),(float) (Half*1.6),ColorUtils.Purple);
 
         glPopMatrix();
         GLFW.glfwSwapBuffers(GLFWWindow);

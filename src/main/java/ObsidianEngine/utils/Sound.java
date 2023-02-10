@@ -105,10 +105,22 @@ public class Sound {
         alSourcef(sourceId,AL_GAIN,gain);
     }
 
-
+    public boolean isPlaying() {
+        int state = alGetSourcei(sourceId,AL_SOURCE_STATE);
+        return state == AL_PLAYING;
+    }
     public void delete(){
         alDeleteBuffers(bufferId);
         alDeleteSources(sourceId);
+    }
+
+    public void pause(){
+        alSourceStop(sourceId);
+        isPlaying = false;
+    }
+    public void resume(){
+        alSourcePlay(sourceId);
+        isPlaying = true;
     }
 
     public void play(){

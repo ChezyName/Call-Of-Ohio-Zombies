@@ -134,7 +134,7 @@ public class Window {
 
         //Create Audio Context + Load Audio File
         Audio.getAudioManager();
-        mainMusic = new Sound(FileUtils.getJarLoc() + "/sounds/MainTheme.ogg",true);
+        mainMusic = new Sound(FileUtils.getJarLoc() + "/sounds/CODZMUSIC.ogg",true);
         mainMusic.play();
 
         //Gunshots SFX
@@ -186,13 +186,10 @@ public class Window {
 
         Player.resetHealth();
         Wave = 0;
-        //Player.setPosition(0,0,0);
 
-        for(int i = 0; i < Zombies.size(); i++){
-            Zombie z = Zombies.get(i);
-            z.Destroy();
-            Zombies.remove(i);
-        }
+        mainMusic.stop();
+        DeathScreen.DeathScreen(GLFWWindow,(title + " " + versionNumber),Zombies);
+        mainMusic.play();
 
         reset = false;
     }
@@ -222,7 +219,7 @@ public class Window {
             //All Zombies Dead / New Wave
             Wave += 1;
             for(int i = 0; i < Math.pow(Wave,2); i++){
-                Zombies.add(new Zombie(new Vector3f(-30,0,0),350 * ((Wave/2) <= 1 ? 1 : Wave),Wave));
+                Zombies.add(new Zombie(new Vector3f(-30,0,0),Wave >= 16 ? 600 : Wave >= 8 ? 400 : 300,Wave));
             }
         }
     }
