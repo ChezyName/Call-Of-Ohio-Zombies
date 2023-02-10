@@ -17,6 +17,7 @@ public class Shader {
 
     public static Shader defaultShader;
     public static Shader defaultTextureShader;
+    public static Shader defaultUIShader;
 
     public Shader(String vertPath, String fragPath){
         vertexFile = FileUtils.loadAsString(vertPath);

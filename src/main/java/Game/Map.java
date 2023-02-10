@@ -71,13 +71,15 @@ public class Map {
         int maxPieces = (int) ((size/incerment) * (size/incerment))*4;
         int currentPiece = 1;
 
+        Texture mapTexture = new Texture("/imgs/Grass.jpg",false);
+
         while (startPos.y < size && !GLFW.glfwWindowShouldClose(WindowID)){
             while (startPos.x < size && !GLFW.glfwWindowShouldClose(WindowID)) {
                 if(GLFW.glfwWindowShouldClose(WindowID)) break;
 
                 //Create Squares
                 Mesh Ground = new Plane(incerment,incerment,new Vector3f(startPos.x,0,startPos.y), ColorUtils.Green);
-                Ground.setTexture(new Texture("/imgs/Grass.jpg",false));
+                Ground.setTexture(mapTexture);
                 Ground.setShader(Shader.defaultTextureShader);
                 Ground.Create();
                 Meshes.add(Ground);

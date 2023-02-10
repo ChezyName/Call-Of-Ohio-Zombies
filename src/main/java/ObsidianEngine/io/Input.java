@@ -61,6 +61,10 @@ public class Input {
     public static boolean getKeyDown(int key) {
         return keys[key];
     }
+    public static boolean isKeyDown(){
+        for(boolean b : keys) if(b) return true;
+        return false;
+    }
 
     public static boolean isMouseButtonDown(int button) {
         return buttons[button];

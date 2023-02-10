@@ -1,9 +1,6 @@
 package ObsidianEngine.io;
 
-import Game.Bullet;
-import Game.Map;
-import Game.Player;
-import Game.Zombie;
+import Game.*;
 import ObsidianEngine.entity.Mesh;
 import ObsidianEngine.render.Camera;
 import ObsidianEngine.render.Shader;
@@ -49,8 +46,8 @@ public class Window {
     private Window(){
         this.width = 1280;
         this.height = 720;
-        this.title = "Chezy's Game";
-        this.versionNumber = "v0.1";
+        this.title = "Call of Ohio : Zesty Warfare";
+        this.versionNumber = "";
     }
 
     public static Window get() {
@@ -141,16 +138,17 @@ public class Window {
         mainMusic.play();
 
         //Gunshots SFX
-        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_5.ogg",false));
-        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_5.ogg",false));
-        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_5.ogg",false));
-        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_5.ogg",false));
-        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_5.ogg",false));
+        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_6.ogg",false,0.25f));
+        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_6.ogg",false,0.25f));
+        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_6.ogg",false,0.25f));
+        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_6.ogg",false,0.25f));
+        GunShots.add(new Sound(FileUtils.getJarLoc() + "/sounds/GunShotSFX_6.ogg",false,0.25f));
 
         //Post OpenGL Init
         //Init Default Shader
         Shader.defaultShader = new Shader("/shaders/mainVertex.glsl","/shaders/mainFragment.glsl");
         Shader.defaultTextureShader  = new Shader("/shaders/TextureVertex.glsl","/shaders/TextureFragment.glsl");
+        Shader.defaultUIShader  = new Shader("/shaders/UIVertex.glsl","/shaders/UIFragment.glsl");
 
         //Set Cursor Image
         MouseUtils.SetCursorImage(GLFWWindow,"/imgs/Crosshair.png");
@@ -158,6 +156,7 @@ public class Window {
         //Starting Meshes & Models
         //Load Map [MULTI-SPRTIE]
         Map.getMap(800,50,MapPieces,cam,GLFWWindow,(title + " " + versionNumber));
+        WaitForKeyPress.WaitMainMenu(GLFWWindow,cam,(title + " " + versionNumber));
 
         /* SINGLE COLOR MAP
         Mesh map = new Plane(15000,15000,new Vector3f(0,0,0));
@@ -218,8 +217,8 @@ public class Window {
             }
         }
 
-        //To Seconds
-        if(Zombies.size() <= 0){
+        //Reset if 15% of Zombies are left
+        if(Zombies.size() <= Math.pow(Wave,2)*0.15f){
             //All Zombies Dead / New Wave
             Wave += 1;
             for(int i = 0; i < Math.pow(Wave,2); i++){
@@ -278,7 +277,8 @@ public class Window {
 
             float BulletDelay = (System.currentTimeMillis() - LastTimeShot);
 
-            if(Input.isMouseButtonDown(0) && BulletDelay >= (400/(Wave <= 0 ? 1 : Wave))) {
+            //(400/(Wave <= 0 ? 1 : Wave))
+            if(Input.isMouseButtonDown(0) && BulletDelay >= 300){
                 Bullets.add(new Bullet(new Vector3f(cam.getPosition().x,0,cam.getPosition().z),Player.getRotation()));
                 LastTimeShot = System.currentTimeMillis();
 
