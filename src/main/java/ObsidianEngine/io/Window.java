@@ -38,7 +38,8 @@ public class Window {
     private Camera cam;
     private Game.Player Player;
 
-    private ArrayList<Mesh> MapPieces,WaterPieces = new ArrayList<Mesh>();
+    private ArrayList<Mesh> MapPieces = new ArrayList<Mesh>();
+    private ArrayList<Mesh> WaterPieces = new ArrayList<Mesh>();
     private ArrayList<Zombie> Zombies = new ArrayList<Zombie>();
     private ArrayList<Bullet> Bullets = new ArrayList<Bullet>();
     private long LastTimeShot = System.currentTimeMillis();
@@ -217,6 +218,9 @@ public class Window {
             }
         }
 
+        //Draw Zombies if not dead
+        Zombie.BatchRenderZombies(Zombies,cam);
+
         //Reset if 15% of Zombies are left
         if(Zombies.size() <= Math.pow(Wave,2)*0.15f){
             //All Zombies Dead / New Wave
@@ -230,7 +234,7 @@ public class Window {
     private void drawAllMeshes(float Delta){
         Player.Draw(cam);
 
-        Map.DrawMapPieces(MapPieces,WaterPieces,cam);
+        Map.DrawMapPieces(WaterPieces,MapPieces,cam);
 
         updateBullets(Delta);
         updateZombies(Delta);
@@ -270,10 +274,10 @@ public class Window {
             float pDelta = (deltaTime/500);
 
             if(!reset){
-                if(Input.getKeyDown(GLFW_KEY_W)) Player.setPosition(0,0,-(1f)*pDelta);
-                if(Input.getKeyDown(GLFW_KEY_S)) Player.setPosition(0,0,(1f)*pDelta);
-                if(Input.getKeyDown(GLFW_KEY_A)) Player.setPosition(-(1f)*pDelta,0,0);
-                if(Input.getKeyDown(GLFW_KEY_D)) Player.setPosition((1f)*pDelta,0,0);
+                if(Input.getKeyDown(GLFW_KEY_W)) Player.setPosition(0,0,-(2f)*pDelta);
+                if(Input.getKeyDown(GLFW_KEY_S)) Player.setPosition(0,0,(2f)*pDelta);
+                if(Input.getKeyDown(GLFW_KEY_A)) Player.setPosition(-(2f)*pDelta,0,0);
+                if(Input.getKeyDown(GLFW_KEY_D)) Player.setPosition((2f)*pDelta,0,0);
                 Player.ClampPosition(Player.getPosition(),new Vector3f(-500,0,500),new Vector3f(460,0,-460));
             }
 

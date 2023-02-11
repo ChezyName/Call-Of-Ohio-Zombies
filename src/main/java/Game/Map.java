@@ -8,16 +8,22 @@ import ObsidianEngine.render.Texture;
 import ObsidianEngine.ui.Image;
 import ObsidianEngine.ui.UIRenderer;
 import ObsidianEngine.utils.ColorUtils;
+import ObsidianEngine.utils.MathUtils;
+import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.system.MemoryUtil;
 
+import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 
 import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL30.*;
 
 public class Map {
     static Image MenuImage = new Image(new Texture("/imgs/GameMenu.jpg"));
@@ -111,7 +117,38 @@ public class Map {
         System.out.println("[MAP LOADED] " + currentPiece + " Map Slots.");
     }
 
-    public static void DrawMapPieces(ArrayList<Mesh> Water,ArrayList<Mesh> Ground,Camera cam){
+    public static void DrawMapPieces(ArrayList<Mesh> WaterM,ArrayList<Mesh> Ground,Camera cam){
+        BatchRender(WaterM,cam,Water);
+        BatchRender(Ground,cam,Grass);
+    }
 
+    private static void BatchRender(ArrayList<Mesh> meshes,Camera cam,Texture Texture){
+        Shader.defaultTextureShader.bind();
+        glActiveTexture(GL_TEXTURE0);
+        Texture.bind();
+        Shader.defaultTextureShader.uploadTexture(0);
+
+        for(Mesh mesh : meshes){
+            Shader.defaultTextureShader.uploadMat4f("uProj",cam.getProjectionMatrix());
+            Shader.defaultTextureShader.uploadMat4f("uView",cam.getViewMatrix());
+
+            glBindVertexArray(mesh.getVAO());
+            glEnableVertexAttribArray(0);
+            glEnableVertexAttribArray(1);
+
+            Matrix4f Transform = MathUtils.createTransformationMatrix(mesh.getPosition(),mesh.getRotation().x,mesh.getRotation().y,mesh.getRotation().z,mesh.getScale());
+            Shader.defaultTextureShader.uploadMat4f("uTransform",Transform);
+
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.getIBO());
+            glDrawElements(GL_TRIANGLES, mesh.getIndices().length, GL_UNSIGNED_INT, 0);
+
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+            glDisableVertexAttribArray(0);
+            glDisableVertexAttribArray(1);
+            glBindVertexArray(0);
+        }
+
+        Shader.defaultTextureShader.unbind();
+        Texture.unbind();
     }
 }

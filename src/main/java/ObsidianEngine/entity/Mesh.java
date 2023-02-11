@@ -163,6 +163,9 @@ public class Mesh implements Cloneable {
     public void setScale(float ns){
         this.Scale = ns;
     }
+    public float getScale(){
+        return Scale;
+    }
 
     public void Rotate(Vector3f newRotation){
         this.Rotation.x += newRotation.x;
