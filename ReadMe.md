@@ -1,4 +1,5 @@
-# Untitled Zombie Game v3-BETA
+# Call of Ohio : Zesty Warfare Zombies
+> Official Release 2/11/2023 2:30AM
 ## What Is This Project About?
 This project is a game made using **[LWJGL](https://www.lwjgl.org/) (Light-Weight Java Game Library)** which give use bindings to things like OpenGL, OpenAL, ect. During a two week time limit I had to make a game for *['My First Game Jam : Winter 2023']*(https://itch.io/jam/my-first-game-jam-winter-2023). The theme was growth and I chose to make a **Zombie-Survival** game where each wave more and more zombies spawn and they become faster while the player gets a faster gun.
 ## How To Play This Game?
