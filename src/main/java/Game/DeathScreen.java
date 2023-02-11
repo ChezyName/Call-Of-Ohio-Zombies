@@ -51,13 +51,6 @@ public class DeathScreen {
             GLFW.glfwSwapBuffers(WinID);
         }
 
-        //MAKE SURE THERE ARE NO ZOMBIES!
-        for(int i = 0; i < Zombies.size(); i++){
-            Zombie z = Zombies.get(i);
-            z.Destroy();
-            Zombies.remove(i);
-        }
-
         DeathAudioF.stop();
         DeathAudioL.stop();
     }

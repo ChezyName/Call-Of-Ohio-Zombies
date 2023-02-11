@@ -2,6 +2,7 @@ package Game;
 
 import ObsidianEngine.entity.Mesh;
 import ObsidianEngine.render.Camera;
+import ObsidianEngine.utils.MathUtils;
 import org.joml.Vector3f;
 
 public class Player {
@@ -32,6 +33,16 @@ public class Player {
 
     public Vector3f getPosition(){
         return mesh.getPosition();
+    }
+
+    public void ClampPosition(Vector3f startPos,Vector3f tLeft, Vector3f bRight){
+        long x = MathUtils.clampLong((long) this.mesh.getPosition().x,(long) tLeft.x,(long) bRight.x);
+        long z = MathUtils.clampLong((long) this.mesh.getPosition().z,(long) bRight.z,(long) tLeft.z);
+
+        //long start = (long) startPos.x;
+        //System.out.println("[CLAMP] " + start);
+
+        this.mesh.setPosition(x,0,z);
     }
 
     public void Draw(Camera cam){

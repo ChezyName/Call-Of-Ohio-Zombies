@@ -11,13 +11,11 @@
   <component name="ChangeListManager">
     <list default="true" id="5b516d30-da46-4da6-a7bf-c00ec8a86d27" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Game/DeathScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/DeathScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Game/WaitForKeyPress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/WaitForKeyPress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/io/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/ui/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/ui/Image.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/ui/UIRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/ui/UIRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/ColorUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/ColorUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/Sound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/MathUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ObsidianEngine/utils/MathUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +73,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/mineb/IdeaProjects/Winter2023GameJam/out/artifacts/Winter2023GameJam_jar/sounds",
+    "last_opened_file_path": "C:/Users/mineb/IdeaProjects/Winter2023GameJam/out/artifacts/Winter2023GameJam_jar/imgs",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -90,10 +88,10 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar\sounds" />
-      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\resources\sounds" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar\imgs" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\resources\imgs" />
+      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\out\artifacts\Winter2023GameJam_jar\sounds" />
+      <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\resources\sounds" />
       <recent name="C:\Users\mineb\IdeaProjects\Winter2023GameJam\src\main\resources\shaders" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -204,11 +202,24 @@
       <workItem from="1675927755111" duration="21000" />
       <workItem from="1675966482558" duration="3782000" />
       <workItem from="1675972819862" duration="12074000" />
-      <workItem from="1675991668054" duration="10464000" />
+      <workItem from="1675991668054" duration="11601000" />
+      <workItem from="1676071097498" duration="4962000" />
+      <workItem from="1676090575227" duration="4245000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Game/Player.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

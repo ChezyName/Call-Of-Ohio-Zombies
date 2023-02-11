@@ -71,13 +71,15 @@ public class Map {
             startPos.x = -size;
         }
     }
-    public static void getMap(float size,float incerment, ArrayList<Mesh> Meshes,Camera cam,long WindowID,String title){
+
+    static Texture Grass = new Texture("/imgs/Grass.jpg",false);
+    static Texture Water = new Texture("/imgs/Water.jpg",false);
+
+    public static void getMap(float size,float incerment, ArrayList<Mesh> Meshes,ArrayList<Mesh> WaterMeshes,Camera cam,long WindowID,String title){
         Vector2f startPos = new Vector2f(-size,-size);
 
         int maxPieces = (int) ((size/incerment) * (size/incerment))*4;
         int currentPiece = 1;
-
-        Texture mapTexture = new Texture("/imgs/Grass.jpg",false);
 
         while (startPos.y < size && !GLFW.glfwWindowShouldClose(WindowID)){
             while (startPos.x < size && !GLFW.glfwWindowShouldClose(WindowID)) {
@@ -85,10 +87,14 @@ public class Map {
 
                 //Create Squares
                 Mesh Ground = new Plane(incerment,incerment,new Vector3f(startPos.x,0,startPos.y), ColorUtils.Green);
-                Ground.setTexture(mapTexture);
+
+                if(startPos.y < -(size/2) || startPos.y > (size/2) || startPos.x < -(size/2) || startPos.x > (size/2)) Ground.setTexture(Water);
+                else Ground.setTexture(Grass);
                 Ground.setShader(Shader.defaultTextureShader);
                 Ground.Create();
-                Meshes.add(Ground);
+
+                if(startPos.y < -(size/2) || startPos.y > (size/2) || startPos.x < -(size/2) || startPos.x > (size/2)) WaterMeshes.add(Ground);
+                else Meshes.add(Ground);
 
                 //System.out.println("[BUILDING MAP]" + currentPiece + "/" + maxPieces);
                 currentPiece++;
@@ -101,6 +107,11 @@ public class Map {
             startPos.y += incerment;
             startPos.x = -size;
         }
+
+        System.out.println("[MAP LOADED] " + currentPiece + " Map Slots.");
     }
 
+    public static void DrawMapPieces(ArrayList<Mesh> Water,ArrayList<Mesh> Ground,Camera cam){
+
+    }
 }

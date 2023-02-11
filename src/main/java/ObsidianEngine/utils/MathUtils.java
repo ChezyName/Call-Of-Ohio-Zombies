@@ -24,6 +24,12 @@ public class MathUtils {
         return (float)(random.nextDouble() * 2 - 1);
     }
 
+    public static long clampLong(long val, long min, long max) {
+        if(val > max) return max;
+        else if(val < min) return min;
+        else return val;
+    }
+
     public static Vector2f getRandomPointOnRadius(float centerX,float centerY,float radius){
         Random random = new Random();
         double angle = random.nextDouble() * 2 * Math.PI;

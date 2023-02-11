@@ -38,7 +38,7 @@ public class Window {
     private Camera cam;
     private Game.Player Player;
 
-    private ArrayList<Mesh> MapPieces = new ArrayList<Mesh>();
+    private ArrayList<Mesh> MapPieces,WaterPieces = new ArrayList<Mesh>();
     private ArrayList<Zombie> Zombies = new ArrayList<Zombie>();
     private ArrayList<Bullet> Bullets = new ArrayList<Bullet>();
     private long LastTimeShot = System.currentTimeMillis();
@@ -155,7 +155,7 @@ public class Window {
 
         //Starting Meshes & Models
         //Load Map [MULTI-SPRTIE]
-        Map.getMap(800,50,MapPieces,cam,GLFWWindow,(title + " " + versionNumber));
+        Map.getMap(1000,50,MapPieces,WaterPieces,cam,GLFWWindow,(title + " " + versionNumber));
         WaitForKeyPress.WaitMainMenu(GLFWWindow,cam,(title + " " + versionNumber));
 
         /* SINGLE COLOR MAP
@@ -188,7 +188,10 @@ public class Window {
         Wave = 0;
 
         mainMusic.stop();
+        Player.setPosition(-30,0,0);
         DeathScreen.DeathScreen(GLFWWindow,(title + " " + versionNumber),Zombies);
+        Player.setPosition(-30,0,0);
+        Zombies.removeAll(Zombies);
         mainMusic.play();
 
         reset = false;
@@ -227,9 +230,7 @@ public class Window {
     private void drawAllMeshes(float Delta){
         Player.Draw(cam);
 
-        for(Mesh m : MapPieces){
-            m.Draw(cam);
-        }
+        Map.DrawMapPieces(MapPieces,WaterPieces,cam);
 
         updateBullets(Delta);
         updateZombies(Delta);
@@ -257,6 +258,7 @@ public class Window {
 
     private void loop() {
         glClearColor(0,0,0,1);
+        Player.setPosition(-30,0,0);
 
         while (!GLFW.glfwWindowShouldClose(GLFWWindow)) {
             if(Player.getHealth() <= 0) Reset();
@@ -267,15 +269,18 @@ public class Window {
             float deltaTime = getDelta();
             float pDelta = (deltaTime/500);
 
-            if(Input.getKeyDown(GLFW_KEY_W)) Player.setPosition(0,0,-(0.05f)*pDelta);
-            if(Input.getKeyDown(GLFW_KEY_S)) Player.setPosition(0,0,(0.05f)*pDelta);
-            if(Input.getKeyDown(GLFW_KEY_A)) Player.setPosition(-(0.05f)*pDelta,0,0);
-            if(Input.getKeyDown(GLFW_KEY_D)) Player.setPosition((0.05f)*pDelta,0,0);
+            if(!reset){
+                if(Input.getKeyDown(GLFW_KEY_W)) Player.setPosition(0,0,-(1f)*pDelta);
+                if(Input.getKeyDown(GLFW_KEY_S)) Player.setPosition(0,0,(1f)*pDelta);
+                if(Input.getKeyDown(GLFW_KEY_A)) Player.setPosition(-(1f)*pDelta,0,0);
+                if(Input.getKeyDown(GLFW_KEY_D)) Player.setPosition((1f)*pDelta,0,0);
+                Player.ClampPosition(Player.getPosition(),new Vector3f(-500,0,500),new Vector3f(460,0,-460));
+            }
 
             float BulletDelay = (System.currentTimeMillis() - LastTimeShot);
 
             //(400/(Wave <= 0 ? 1 : Wave))
-            if(Input.isMouseButtonDown(0) && BulletDelay >= 300){
+            if(Input.isMouseButtonDown(0) && BulletDelay >= 600 * ((Wave/32) <= 0.3 ? 0.3 : (Wave/32))){
                 Bullets.add(new Bullet(new Vector3f(cam.getPosition().x,0,cam.getPosition().z),Player.getRotation()));
                 LastTimeShot = System.currentTimeMillis();
 
