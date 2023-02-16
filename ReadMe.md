@@ -19,3 +19,5 @@ and extract anywhere on your computer. Once extracted just open or run the **`.J
 | D            |        Move Right       |
 | LMB          | Shoot At Mouse Position |
 | Mouse        |      Look At Mouse      |
+
+> Game gets harder the longer you survive, good luck!
